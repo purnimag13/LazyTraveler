@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SavedTripsViewDlg" widgetVar="SavedTripsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSavedTripsTitle}">
+            <h:form id="SavedTripsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{savedTripsController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_id}"/>
+                        <h:outputText value="#{savedTripsController.selected.id}" title="#{bundle.ViewSavedTripsTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_startLocation}"/>
+                        <h:outputText value="#{savedTripsController.selected.startLocation}" title="#{bundle.ViewSavedTripsTitle_startLocation}"/>
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_location}"/>
+                        <h:outputText value="#{savedTripsController.selected.location}" title="#{bundle.ViewSavedTripsTitle_location}"/>
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_startDate}"/>
+                        <h:outputText value="#{savedTripsController.selected.startDate}" title="#{bundle.ViewSavedTripsTitle_startDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_endDate}"/>
+                        <h:outputText value="#{savedTripsController.selected.endDate}" title="#{bundle.ViewSavedTripsTitle_endDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_flightCost}"/>
+                        <h:outputText value="#{savedTripsController.selected.flightCost}" title="#{bundle.ViewSavedTripsTitle_flightCost}"/>
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_hotelName}"/>
+                        <h:outputText value="#{savedTripsController.selected.hotelName}" title="#{bundle.ViewSavedTripsTitle_hotelName}"/>
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_hotelCost}"/>
+                        <h:outputText value="#{savedTripsController.selected.hotelCost}" title="#{bundle.ViewSavedTripsTitle_hotelCost}"/>
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_restaurants}"/>
+                        <h:outputText value="#{savedTripsController.selected.restaurants}" title="#{bundle.ViewSavedTripsTitle_restaurants}"/>
+                        <h:outputText value="#{bundle.ViewSavedTripsLabel_events}"/>
+                        <h:outputText value="#{savedTripsController.selected.events}" title="#{bundle.ViewSavedTripsTitle_events}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SavedTripsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

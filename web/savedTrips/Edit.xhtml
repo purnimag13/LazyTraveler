@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SavedTripsEditDlg" widgetVar="SavedTripsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSavedTripsTitle}">
+            <h:form id="SavedTripsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{savedTripsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{savedTripsController.selected.id}" title="#{bundle.EditSavedTripsTitle_id}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_startLocation}" for="startLocation" />
+                        <p:inputText id="startLocation" value="#{savedTripsController.selected.startLocation}" title="#{bundle.EditSavedTripsTitle_startLocation}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_startLocation}"/>
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_location}" for="location" />
+                        <p:inputText id="location" value="#{savedTripsController.selected.location}" title="#{bundle.EditSavedTripsTitle_location}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_location}"/>
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_startDate}" for="startDate" />
+                        <p:calendar id="startDate" pattern="MM/dd/yyyy" value="#{savedTripsController.selected.startDate}" title="#{bundle.EditSavedTripsTitle_startDate}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_startDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_endDate}" for="endDate" />
+                        <p:calendar id="endDate" pattern="MM/dd/yyyy" value="#{savedTripsController.selected.endDate}" title="#{bundle.EditSavedTripsTitle_endDate}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_endDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_flightCost}" for="flightCost" />
+                        <p:inputText id="flightCost" value="#{savedTripsController.selected.flightCost}" title="#{bundle.EditSavedTripsTitle_flightCost}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_flightCost}"/>
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_hotelName}" for="hotelName" />
+                        <p:inputText id="hotelName" value="#{savedTripsController.selected.hotelName}" title="#{bundle.EditSavedTripsTitle_hotelName}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_hotelName}"/>
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_hotelCost}" for="hotelCost" />
+                        <p:inputText id="hotelCost" value="#{savedTripsController.selected.hotelCost}" title="#{bundle.EditSavedTripsTitle_hotelCost}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_hotelCost}"/>
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_restaurants}" for="restaurants" />
+                        <p:inputTextarea rows="4" cols="30" id="restaurants" value="#{savedTripsController.selected.restaurants}" title="#{bundle.EditSavedTripsTitle_restaurants}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_restaurants}"/>
+                        <p:outputLabel value="#{bundle.EditSavedTripsLabel_events}" for="events" />
+                        <p:inputTextarea rows="4" cols="30" id="events" value="#{savedTripsController.selected.events}" title="#{bundle.EditSavedTripsTitle_events}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_events}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{savedTripsController.update}" value="#{bundle.Save}" update="display,:SavedTripsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SavedTripsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SavedTripsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
