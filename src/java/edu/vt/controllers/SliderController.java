@@ -28,7 +28,7 @@ public class SliderController {
 
         sliderImages = new ArrayList<>();
 
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= 5; i++) {
             sliderImages.add("photo" + i + ".png");
         }
     }
@@ -66,27 +66,6 @@ public class SliderController {
                 break;
             case "photo5.png":
                 imageDescription = "The Best Minestrone Soup Recipe";
-                break;
-            case "photo6.png":
-                imageDescription = "Almond-Cardamom Baklava";
-                break;
-            case "photo7.png":
-                imageDescription = "Lemon Pepper Dill Tilapia";
-                break;
-            case "photo8.png":
-                imageDescription = "Pumpkin Pecan Cheesecake Cookie Bars";
-                break;
-            case "photo9.png":
-                imageDescription = "Parmesan Crusted Chicken";
-                break;
-            case "photo10.png":
-                imageDescription = "Mint Chocolate Ice Cream Sandwich";
-                break;
-            case "photo11.png":
-                imageDescription = "Red Cabbage Salad with Roasted Cipollini Onions";
-                break;
-            case "photo12.png":
-                imageDescription = "Buffalo Chicken Drumsticks with Blue Cheese Dip";
                 break;
         }
 

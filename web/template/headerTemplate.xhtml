@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Osman Balci on 2018.06.16
+Copyright © 2018 Osman Balci. All rights reserved.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!--
+    *********************************************
+    * Header Component of Template siteTemplate *
+    *********************************************
+    This page's content is displayed on the top of each page created based on the siteTemplate.
+    Changes made in this file will show up automatically with all pages created based on the
+    siteTemplate for the entire site, achieving great maintainability.
+    -->
+
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+    <ui:composition>
+        <h:form>
+            <table border="0" cellspacing="0" cellpadding="10" width="100%">
+                <tr>
+                    <!--
+                    ***************************************
+                    Column 3 (Right): Hamburger Menu Button
+                    ***************************************
+                    -->
+
+                    <!-- 
+                                ===========================================
+                                |   Menu Options IF a User is Signed In   |
+                                ===========================================
+                    -->
+                    <c:if test="#{userController.isLoggedIn() == true}">
+                        <p:tabMenu activeIndex="#{param.i}">
+                            <p:menuitem outcome="/index" >
+                                <i class="fas fa-home"></i>&nbsp;Home
+                                <f:param name="i" value="0" />
+                            </p:menuitem>
+                            <p:menuitem onclick="PF('TripSearchDialog').show();return false;">
+                                <i class="fas fa-suitcase"/>&nbsp;Take a Trip
+                                <f:param name="i" value="2" />
+                            </p:menuitem>
+                            <p:menuitem outcome="/savedTrips/List" >
+                                <i class="fas fa-plane"></i>&nbsp;Saved Trips
+                                <f:param name="i" value="0" />
+                            </p:menuitem>
+                            <p:menuitem outcome="/userFile/UploadPhoto" >
+                                <i class="fas fa-camera"></i>&nbsp;Upload Photos
+                                <f:param name="i" value="0" />
+                            </p:menuitem>
+                            <p:menuitem outcome="/savedTrips/List" >
+                                <i class="fas fa-images"></i>&nbsp;My Photos
+                                <f:param name="i" value="0" />
+                            </p:menuitem>
+                            <p:menuitem action="#{userController.logout()}" >
+                                <i class="fas fa-sign-out-alt"></i>&nbsp;Sign Out
+                                <f:param name="i" value="0" />
+                            </p:menuitem>                            
+                        </p:tabMenu>
+
+
+                    </c:if>
+
+                    <!-- 
+                    ============================================
+                    |   Menu Options IF No User is Signed In   |
+                    ============================================
+                    -->
+                    <c:if test="#{userController.isLoggedIn() == false}">
+                        <p:tabMenu activeIndex="#{param.i}">
+                            <p:menuitem outcome="/index" >
+                                <i class="fas fa-home"></i>&nbsp;Home
+                                <f:param name="i" value="0" />
+                            </p:menuitem>
+                            <p:menuitem outcome="/SignIn">
+                                <i class="fas fa-sign-in-alt"></i>&nbsp;Sign In
+                                <f:param name="i" value="1" />
+                            </p:menuitem>
+                            <p:menuitem outcome="/userAccount/CreateAccount">
+                                <i class="fas fa-user-plus"></i>&nbsp;Create an Account
+                                <f:param name="i" value="2" />
+                            </p:menuitem>
+                            <p:menuitem onclick="PF('TripSearchDialog').show();return false;">
+                                <i class="fas fa-suitcase"/>&nbsp;Take a Trip
+                                <f:param name="i" value="2" />
+                            </p:menuitem>
+                        </p:tabMenu>
+
+                    </c:if>
+                </tr>
+            </table>
+
+        </h:form>
+        <!-- 
+        ====================================================================
+        |  Clicking the MOVIE SEARCH link displays this Dialog window for  |
+        |  the user to enter a search query and click the Search button.   |
+        ====================================================================
+        -->
+        <p:dialog position="center center" id="TripSearchDlg" widgetVar="TripSearchDialog" 
+                  modal="true" resizable="false" appendTo="@(body)" header="Take a Trip" responsive="true">
+
+            <h:form id="searchDialogForm">
+                <div align="center" bgcolor="#FDF5E6" >
+                    <table border="0" align="center" cellpadding="10" cellspacing="0">
+                        <tr>
+                            <th align="left">
+                                <h:outputLabel for="searchQueryField" value="Search:" />
+                            </th>
+                            <th align="right">
+                                <p:inputText id="searchQueryField" style="width:200px" placeholder="Enter search string"
+                                             required="true" requiredMessage="Please Enter a Search String!"
+                                             value="#{searchedTripController.searchQuery}" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="left">
+                                <h:outputLabel for="searchQueryField" value="Trip Length:" />
+                            </th>
+                            <th align="right">
+                                <!--Dropdown search options -->
+                                <p:selectOneMenu id="tripLabel" value="#{searchedTripController.dietLabels}"
+                                                 required="true" requiredMessage="Please Select a trip length!" 
+                                                 class="standardText" >
+
+                                    <f:selectItem itemLabel="Select Trip Length"  itemValue="" noSelectionOption="true"/>
+                                    <f:selectItem itemLabel="1 Day"          itemValue="1" />
+                                    <f:selectItem itemLabel="3 Days"          itemValue="3" />
+                                    <f:selectItem itemLabel="5 Days"            itemValue="5" />
+                                    <f:selectItem itemLabel="1 Week"          itemValue="7" />
+
+                                </p:selectOneMenu>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="left">
+                                
+                                <h:outputLabel for="searchQueryField" value="Start Date:" />
+                            </th>
+                            <th align="right">
+                                <!--Dropdown search options -->
+                                <p:calendar id="datePublished" placeholder="MM/dd/yyyy" pattern="MM/dd/yyyy" class="inputTextField" mask="true"
+                                    value="#{publicVideoController.selected.datePublished}" 
+                                    required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_datePublished}" />
+                            </th>
+                            
+                        </tr>
+                        
+
+
+                    </table>
+
+                    <!--  SEARCH button:
+                    Clicking the Search button invokes the performSearch() method of the
+                    searchedMovieController CDI @Named bean. The performSearch() method executes
+                    the search for the searchQuery property value and at the end of the execution with
+                    
+                        return "MovieSearchResults?faces-redirect=true";
+                    
+                    it returns "MovieSearchResults" as the name of the XHTML file to display.
+                    -->
+                    <p:commandButton value="Search" id="searchButton"  ajax="false" icon="fas fa-search"
+                                     action="#{searchedMovieController.performSearch()}" />
+                    &nbsp;&nbsp;
+
+                    <!-- CANCEL button -->
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('TripSearchDialog').hide()" 
+                                     icon="fas fa-ban"/>
+                    <br /><br />
+                </div>
+            </h:form>  
+
+        </p:dialog>
+
+    </ui:composition>
+    <!-- Do not enter tags before the composition line since they are ignored by JSF -->
+
+</html>
