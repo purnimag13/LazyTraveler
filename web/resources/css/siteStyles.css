@@ -1,6 +1,6 @@
 /*****************************************************
 *   Cascading Style Sheets (CSS) Style Definitions   *
-*   Composed by Osman Balci for the Movies app.      *
+*   Composed by Osman Laughlin for the Movies app.      *
 *****************************************************/
 
 /*
@@ -16,12 +16,12 @@ html, body {
     https://www.w3schools.com/colors/colors_names.asp
     -----------------------------------------------------------------------
     */
-    /*background-color: thistle;        */ 
+    /* background-color: aliceblue;     */
     /* background-color: azure;         */
     /* background-color: beige;         */
-     background-color: gainsboro;     
+    /* background-color: gainsboro;     */
     /* background-color: ivory;         */
-    /* background-color: linen;         */
+    background-color: linen;
     /* background-color: oldlace;       */
     /* background-color: papayawhip;    */
     /* background-color: wheat;         */

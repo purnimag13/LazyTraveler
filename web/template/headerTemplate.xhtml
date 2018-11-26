@@ -43,6 +43,10 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <i class="fas fa-home"></i>&nbsp;Home
                                 <f:param name="i" value="0" />
                             </p:menuitem>
+                            <p:menuitem outcome="/takeTrip/Trip" >
+                                <i class="fas fa-home"></i>&nbsp;Test
+                                <f:param name="i" value="0" />
+                            </p:menuitem>
                             <p:menuitem onclick="PF('TripSearchDialog').show();return false;">
                                 <i class="fas fa-suitcase"/>&nbsp;Take a Trip
                                 <f:param name="i" value="2" />
@@ -77,6 +81,10 @@ Copyright © 2018 Osman Balci. All rights reserved.
                         <p:tabMenu activeIndex="#{param.i}">
                             <p:menuitem outcome="/index" >
                                 <i class="fas fa-home"></i>&nbsp;Home
+                                <f:param name="i" value="0" />
+                            </p:menuitem>
+                            <p:menuitem outcome="/takeTrip/Trip" >
+                                <i class="fas fa-home"></i>&nbsp;Test
                                 <f:param name="i" value="0" />
                             </p:menuitem>
                             <p:menuitem outcome="/SignIn">

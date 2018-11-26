@@ -39,5 +39,5 @@ This file is used to configure a web application (WAR file).
     Windows OS: Specify the DocRoot absolute path starting with C:
     <property name="alternatedocroot_1" value="from=/UserPhotoStorage/* dir=C:/Users/Balci/DocRoot" />
   -->
-  <property name="alternatedocroot_1" value="from=/SurveyUserPhotoStorage/* dir=C:/Users/Ethan/DocRoot" />
+  <property name="alternatedocroot_1" value="from=/SurveyUserPhotoStorage/* dir=/Users/taralaughlin/DocRoot" />
 </glassfish-web-app>
