@@ -86,8 +86,8 @@ public final class Constants {
      */
 
     public static final String FILES_RELATIVE_PATH = "/CloudStorage/FileStorage/";
-    public static final String PHOTOS_RELATIVE_PATH = "/CloudStorage/PhotoStorage/";
-    public static final String DEFAULT_PHOTO_RELATIVE_PATH = "/CloudStorage/PhotoStorage/defaultUserPhoto.png";
+    public static final String PHOTOS_RELATIVE_PATH = "C:/Users/Ethan/DocRoot/PhotoStorage/";
+    public static final String DEFAULT_PHOTO_RELATIVE_PATH = "C:/Users/Ethan/DocRoot/UserPhotoStorage/defaultUserPhoto.png";
 
     /* 
     ==================================================

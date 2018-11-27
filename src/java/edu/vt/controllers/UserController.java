@@ -577,7 +577,7 @@ public class UserController implements Serializable {
         logout();
 
         // Redirect to show the index (home) page
-        return "/index?faces-redirect=true";
+        return "/userAccount/Profile?faces-redirect=true";
     }
 
     /*
