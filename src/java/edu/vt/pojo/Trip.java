@@ -8,18 +8,40 @@ package edu.vt.pojo;
  *
  * @author WBG
  */
-public class Location {
+public class Trip {
     
     private String tripType;
     private String latitude;
     private String longitude;
+    private String name;
+    private String cost;
+    private Forecast fiveDayforecast;
 
-    public Location(String lat, String lon, String type) {
+    public Trip(String lat, String lon, String type, String name) {
         this.tripType = type;
         this.latitude = lat;
         this.longitude = lon;
+        this.name = name;
     }
 
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public Forecast getFiveDayforecast() {
+        return fiveDayforecast;
+    }
+
+    public void setFiveDayforecast(Forecast fiveDayforecast) {
+        this.fiveDayforecast = fiveDayforecast;
+    }
+
+    
+    
     public String getTripType() {
         return tripType;
     }
@@ -42,6 +64,14 @@ public class Location {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
     
