@@ -46,7 +46,11 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+<<<<<<< HEAD
                     <file>${file.reference.unirest-java-1.4.9.jar}</file>
+=======
+                    <file>${file.reference.hamcrest-all-1.3.jar}</file>
+>>>>>>> b8dbbad... This update includes the weather forecast info for a specific location
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
