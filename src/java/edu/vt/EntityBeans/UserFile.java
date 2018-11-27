@@ -4,6 +4,7 @@
  */
 package edu.vt.EntityBeans;
 
+import edu.vt.globals.Constants;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -122,6 +123,10 @@ public class UserFile implements Serializable {
     @Override
     public String toString() {
         return "edu.vt.EntityBeans.UserFile[ id=" + id + " ]";
+    }
+    
+    public String getFilePath() {
+        return Constants.FILES_ABSOLUTE_PATH + getFilename();
     }
     
 }
