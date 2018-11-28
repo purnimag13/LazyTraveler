@@ -21,7 +21,7 @@ html, body {
     /* background-color: beige;         */
     /* background-color: gainsboro;     */
     /* background-color: ivory;         */
-    background-color: linen;
+    background-color: white;
     /* background-color: oldlace;       */
     /* background-color: papayawhip;    */
     /* background-color: wheat;         */
@@ -42,14 +42,11 @@ body, p {
 }
 
 /* Style standard HTML tag header 1 */
-h1 {
+/*h1 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12pt;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: none;
+    
     color: maroon;
-}
+}*/
 
 /*
 =======================================
@@ -596,4 +593,47 @@ if content overflows an element's box.
 /* Leave 10px pading on top for the ui-button elements */
 .ui-button {
     margin-top: 10px !important;
+}
+/*
+========================================================
+|   Trying to make this shiz look nice af              |
+|   yeet                                               |
+========================================================
+*/
+.trip-photos {
+    font-size: 15pt;
+    font-family: 'Montserrat', sans-serif;
+    color: pink;
+    text-align: center;
+}
+.trip-title {
+    font-size: 40pt;
+    float:right;
+    font-family: 'Montserrat', sans-serif;
+    margin-right: 200pt;
+
+    color: pink;
+}
+.trip-description {
+    font-size: 18pt;
+    width: 690px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: right;
+    color: grey;
+}
+.texter {
+    float: left;
+    width: 17%;
+    padding: 5px;
+}
+.flight-info {
+/*    -webkit-box-shadow: 3px 3px 15px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 15px -4px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 15px -4px rgba(0,0,0,0.75);*/
+    font-family: 'Montserrat', sans-serif;
+    border: black;
+    border-width: 3px;
+    width: 600px;
+    background: white;
+    color: grey;
 }

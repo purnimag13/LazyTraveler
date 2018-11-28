@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Tara Laughlin on 2018.11.26 
+Copyright © 2018 Tara Laughlin. All rights reserved.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="editableContent">
+            <h:head>
+                <title>Long Beach Weekend Trip</title>
+                <h1 class="trip-title"> Long Beach</h1>
+                <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            </h:head>
+            <body>
+                <div>
+                    <div>
+                        <p:graphicImage value="/resources/images/beach/longbeach.png" 
+                                        style="width:400px;height:400px"></p:graphicImage>
+                        <div class="trip-title">
+                            
+                            <h2 class="trip-description">Long Beach is a coastal city and port in Southern California. Moored in its Queensway Bay, RMS Queen Mary is a retired ocean liner and museum ship. The waterfront Aquarium of the Pacific features touch tanks and a shark lagoon. Modern and contemporary works are on display at the Museum of Latin American Art. Rancho Los Cerritos is a 19th-century adobe home and museum set in expansive gardens.</h2>
+
+                        </div>
+                    </div>
+                    <div style="font-family: 'Montserrat', sans-serif">
+                        <h2>Flight Information</h2>
+                        <div class="flight-info">
+                            <p> Depart: 5:05 am - 11:27 am --------9h 22m (2 stops)  American Airlines ---------IAD - 39m in ATL Layover - LAX</p>
+                            <p> Return: 11:35 pm - 9:11 am --------6h 36m (1 stop) Delta ---------LAX - 48m in ATL Layover- IAD</p> 
+                        </div>
+                    </div>
+                    <div>
+                        <h2>Hotel Information</h2>
+                        <p> Beach Inn Motel</p>
+                        <p> $90 nightly rate</p>
+                    </div>
+                    <div>
+                        <h2>Experiences</h2>
+                        <h3> Activities</h3>
+                        <h4> Aquarium of the Pacific</h4>
+                        <h4> The Queen Mary</h4>
+                        <h4> Knott's Berry Farm</h4>
+                        <h3> Restaurants</h3>
+                        <h4> The Black Cat</h4>
+                        <h4> Playa Provisions</h4>
+                        <h4> Ostrich Farm</h4>
+                    </div>
+                </div>
+            </body>
+        </ui:define>
+    </ui:composition>
+</html>
