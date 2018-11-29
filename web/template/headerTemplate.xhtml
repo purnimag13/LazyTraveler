@@ -31,6 +31,68 @@ Copyright © 2018 Osman Balci. All rights reserved.
                     Column 3 (Right): Hamburger Menu Button
                     ***************************************
                     -->
+                    <td align="right" valign="middle" style="width:100px;">
+
+                        <!--
+                        tabindex="0" enables the menu element to be focusable and to trigger interaction. 
+                        This HTML5 attribute makes the menu element act like a button.
+                        
+                        style="float:left;" and style="left:0;" place the drop-down menu on the left side.
+                        
+                        <h:link> renders into <a href> for which drop-down menu CSS style is defined.
+                        Therefore, the drop-down menu works either with <a href> or <h:link>.
+                        -->
+                        <div tabindex="0" class="menu" style="float:right;padding-right:20px;">
+                            <div class="menu-dropdown" style="right:0;">
+
+                                <h:link outcome="/index" class="standardText">
+                                    <i class="fas fa-home"></i>&nbsp;Home
+                                </h:link>
+
+                                <!-- 
+                                ===========================================
+                                |   Menu Options IF a User is Signed In   |
+                                ===========================================
+                                -->
+                                <c:if test="#{userController.isLoggedIn() == true}">
+
+                                    <!-- Clicking "My Account" displays the Profile.xhtml file -->
+                                    <h:link outcome="/userAccount/Profile" class="standardText">
+                                        <!-- 
+                                        Display the user's photo in a small circle. The cache="false" option
+                                        enables immediate display of a newly uploaded photo without using cache.
+                                        -->
+                                        <p:graphicImage cache="false" class="smallProfilePhoto" 
+                                                        value="#{userController.userPhoto()}"/>&nbsp;&nbsp;My Account
+                                    </h:link>
+                                    
+                                    <!-- Clicking "Sign Out" invokes userController's logout() method -->
+                                    <h:commandLink action="#{userController.logout()}" class="standardText" >
+                                        <i class="fas fa-sign-out-alt"></i>&nbsp;Sign Out
+                                    </h:commandLink>
+                                    
+                                </c:if>
+
+                                <!-- 
+                                ============================================
+                                |   Menu Options IF No User is Signed In   |
+                                ============================================
+                                -->
+                                <c:if test="#{userController.isLoggedIn() == false}">
+                                    <!-- Clicking "Sign In" displays the SignIn.xhtml file -->
+                                    <h:link outcome="/SignIn" class="standardText">
+                                        <i class="fas fa-sign-in-alt"></i>&nbsp;Sign In
+                                    </h:link>
+
+                                    <!-- Clicking "Create an Account" displays the CreateAccount.xhtml file -->
+                                    <h:link outcome="/userAccount/CreateAccount" class="standardText">
+                                        <i class="fas fa-user-plus"></i>&nbsp;Create an Account
+                                    </h:link>
+                                </c:if>
+
+                            </div>
+                        </div>
+                    </td>
 
                     <!-- 
                                 ===========================================
@@ -59,10 +121,6 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <i class="fas fa-images"></i>&nbsp;My Photos
                                 <f:param name="i" value="0" />
                             </p:menuitem>
-                            <p:menuitem action="#{userController.logout()}" >
-                                <i class="fas fa-sign-out-alt"></i>&nbsp;Sign Out
-                                <f:param name="i" value="0" />
-                            </p:menuitem>                            
                         </p:tabMenu>
 
 
@@ -78,14 +136,6 @@ Copyright © 2018 Osman Balci. All rights reserved.
                             <p:menuitem outcome="/index" >
                                 <i class="fas fa-home"></i>&nbsp;Home
                                 <f:param name="i" value="0" />
-                            </p:menuitem>
-                            <p:menuitem outcome="/SignIn">
-                                <i class="fas fa-sign-in-alt"></i>&nbsp;Sign In
-                                <f:param name="i" value="1" />
-                            </p:menuitem>
-                            <p:menuitem outcome="/userAccount/CreateAccount">
-                                <i class="fas fa-user-plus"></i>&nbsp;Create an Account
-                                <f:param name="i" value="2" />
                             </p:menuitem>
                             <p:menuitem onclick="PF('TripSearchDialog').show();return false;">
                                 <i class="fas fa-suitcase"/>&nbsp;Take a Trip
