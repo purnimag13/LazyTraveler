@@ -365,7 +365,7 @@ public class UserFileController implements Serializable {
                 // See method below
                 refreshFileList();
 
-                return "/userFile/ListUserPhotos?faces-redirect=true";
+                return "/userFile/ListUserFiles?faces-redirect=true";
 
             } catch (IOException ex) {
                 Methods.showMessage("Fatal Error", "Something went wrong while deleting the user file!",

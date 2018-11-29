@@ -172,13 +172,13 @@ public class FileUploadManager implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, fatalErrorMessage);
         }
         
-        return "/userFile/ListUserPhotos?faces-redirect=true";
+        return "/userFile/ListUserFiles?faces-redirect=true";
     }
 
     // Show the File Upload Page
     public String showFileUploadPage() {
 
-        return "/userFile/UploadPhoto?faces-redirect=true";
+        return "/userFile/UploadFile?faces-redirect=true";
     }
 
     public void upload() throws IOException {
