@@ -43,10 +43,10 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <i class="fas fa-home"></i>&nbsp;Home
                                 <f:param name="i" value="0" />
                             </p:menuitem>
-                            <p:menuitem outcome="/takeTrip/Trip" >
+<!--                            <p:menuitem outcome="/takeTrip/Trip" >
                                 <i class="fas fa-home"></i>&nbsp;Test
                                 <f:param name="i" value="0" />
-                            </p:menuitem>
+                            </p:menuitem>-->
                             <p:menuitem onclick="PF('TripSearchDialog').show();return false;">
                                 <i class="fas fa-suitcase"/>&nbsp;Take a Trip
                                 <f:param name="i" value="2" />
@@ -83,10 +83,10 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <i class="fas fa-home"></i>&nbsp;Home
                                 <f:param name="i" value="0" />
                             </p:menuitem>
-                            <p:menuitem outcome="/takeTrip/Trip" >
+<!--                            <p:menuitem outcome="/takeTrip/Trip" >
                                 <i class="fas fa-home"></i>&nbsp;Test
                                 <f:param name="i" value="0" />
-                            </p:menuitem>
+                            </p:menuitem>-->
                             <p:menuitem outcome="/SignIn">
                                 <i class="fas fa-sign-in-alt"></i>&nbsp;Sign In
                                 <f:param name="i" value="1" />
@@ -125,7 +125,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                             <th align="right">
                                 <p:inputText id="searchQueryField" style="width:200px" placeholder="Enter search string"
                                              required="true" requiredMessage="Please Enter a Search String!"
-                                             value="#{searchedTripController.searchQuery}" />
+                                             value=" " />
                             </th>
                         </tr>
                         <tr>
@@ -134,7 +134,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                             </th>
                             <th align="right">
                                 <!--Dropdown search options -->
-                                <p:selectOneMenu id="tripLabel" value="#{searchedTripController.dietLabels}"
+                                <p:selectOneMenu id="tripLabel" value="Please Select a trip length!"
                                                  required="true" requiredMessage="Please Select a trip length!" 
                                                  class="standardText" >
 
@@ -155,7 +155,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                             <th align="right">
                                 <!--Dropdown search options -->
                                 <p:calendar id="datePublished" placeholder="MM/dd/yyyy" pattern="MM/dd/yyyy" class="inputTextField" mask="true"
-                                    value="#{publicVideoController.selected.datePublished}" 
+                                    value="Start Date:" 
                                     required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_datePublished}" />
                             </th>
                             
@@ -175,7 +175,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                     it returns "MovieSearchResults" as the name of the XHTML file to display.
                     -->
                     <p:commandButton value="Search" id="searchButton"  ajax="false" icon="fas fa-search"
-                                     action="#{searchedMovieController.performSearch()}" />
+                                     action="/takeTrip/Trip?faces-redirect=true" />
                     &nbsp;&nbsp;
 
                     <!-- CANCEL button -->

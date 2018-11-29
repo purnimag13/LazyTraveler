@@ -627,13 +627,11 @@ if content overflows an element's box.
     padding: 5px;
 }
 .flight-info {
-/*    -webkit-box-shadow: 3px 3px 15px -4px rgba(0,0,0,0.75);
-    -moz-box-shadow: 3px 3px 15px -4px rgba(0,0,0,0.75);
-    box-shadow: 3px 3px 15px -4px rgba(0,0,0,0.75);*/
     font-family: 'Montserrat', sans-serif;
-    border: black;
-    border-width: 3px;
-    width: 600px;
-    background: white;
-    color: grey;
+    float:bottom;
+    padding-right:300px;
+    border-top: 100px;
+    width:500px;
+    height:100px;
+    padding-bottom: 200px;
 }
