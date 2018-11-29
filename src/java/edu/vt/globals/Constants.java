@@ -1,3 +1,7 @@
+/*
+ * Created by Purnima Ghosh on 2018.09.29  * 
+ * Copyright © 2018 Purnima Ghosh. All rights reserved. * 
+ */
 package edu.vt.globals;
 
 public final class Constants {
@@ -34,8 +38,10 @@ public final class Constants {
     
     macOS (Unix or Linux): Specify the absolute directory path as shown below.
      */
-    public static final String FILES_ABSOLUTE_PATH  = "/home/cloudsd/Ludwick/DocRoot/CloudStorage/FileStorage/";
-    public static final String PHOTOS_ABSOLUTE_PATH = "/home/cloudsd/Ludwick/DocRoot/CloudStorage/PhotoStorage/";
+    public static final String FILES_ABSOLUTE_PATH = "/Users/purni/DocRoot/LazyTraveler/FileStorage/";
+
+    public static final String PHOTOS_ABSOLUTE_PATH = "/Users/purni/DocRoot/LazyTraveler/PhotoStorage/";
+
 
     /*
     In glassfish-web.xml, we specified an alternate document root (DocRoot) with the statement below
@@ -84,10 +90,9 @@ public final class Constants {
         <> the app name starting with slash, e.g., /CloudDrive-Balci, if an external file is referenced or
         <> the URI of the Web Pages folder of the application if an internal file is referenced.
      */
-
-    public static final String FILES_RELATIVE_PATH = "/CloudStorage/FileStorage/";
-    public static final String PHOTOS_RELATIVE_PATH = "/Users/taralaughlin/DocRoot/PhotoStorage/";
-    public static final String DEFAULT_PHOTO_RELATIVE_PATH = "/Users/taralaughlin/DocRoot/UserPhotoStorage/defaultUserPhoto.png";
+    public static final String FILES_RELATIVE_PATH = "/LazyTraveler/FileStorage";
+    public static final String PHOTOS_RELATIVE_PATH = "/LazyTraveler/PhotoStorage/";
+    public static final String DEFAULT_PHOTO_RELATIVE_PATH = "/LazyTraveler/UserPhotoStorage/defaultUserPhoto.png";
 
     /* 
     ==================================================
