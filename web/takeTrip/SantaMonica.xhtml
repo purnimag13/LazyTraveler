@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created by Tara Laughlin on 2018.11.26 
+Copyright © 2018 Tara Laughlin. All rights reserved.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template/siteTemplate.xhtml">
+        <ui:define name="editableContent">
+            <h:head>
+                <title>Santa Monica Weekend Trip</title>
+                <h1 class="trip-title"> Santa Monica Beach</h1>
+                <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            </h:head>
+            <body>
+
+                <div class="trip-title">
+
+                    <h2 class="trip-description"> Santa Monica is a coastal city west of downtown Los Angeles. Santa Monica Beach is fringed by Palisades Park, with views over the Pacific Ocean. Santa Monica Pier is home to the Pacific Park amusement park, historic Looff Hippodrome Carousel and Santa Monica Pier Aquarium. Next to the pier is Muscle Beach, an outdoor gym established in the 1930s. In the city center, Bergamot Station houses several art galleries.</h2>
+
+                </div>
+                <div>
+                    <p:graphicImage value="/resources/images/beach/paradise.png" 
+                                    style="width:400px;height:400px"></p:graphicImage>
+
+                </div>
+                <div style="font-family: 'Montserrat', sans-serif">
+                    <div>
+                        <h2 style="float:left">Flight Information</h2>
+                        <h2 style="float: right; margin-right: 300px">Hotel Information</h2>
+                        
+                    </div>
+                </div>
+                <div class="flight-info">
+                    <span style="float:left;"> Depart: 4:55 pm - 12:35 am&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;4h 40m Nonstop</span>
+                    <span style="float:left; font-size: 12px"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;United&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IAD - LAX</span>
+                    <span style="float:left"> Return: 4:00 pm - 6:51 pm &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;5h 51m Nonstop </span>
+                    <span style="float:left; font-size: 12px">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;United&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;LAX - IAD</span>
+
+                </div>
+                <div style="font-family: 'Montserrat', sans-serif;">
+                    <h2><center style="padding-bottom: 20px; margin-right: 300px">Experiences</center></h2>
+                </div>
+                <div style="font-family: 'Montserrat', sans-serif">
+                    <h3 style="float:left;"> Activities</h3>
+                    <h3 style="float: right; margin-right: 300px"> Restaurants</h3>
+                </div>
+                <div style="padding-top: 80px;font-family: 'Montserrat', sans-serif">
+                    <h4 style="float:right;margin-right: 300px">The Butcher's Daughter</h4>
+                    <h4 > Santa Monica Pier</h4>
+                    <h4 style="float:right;margin-right: 300px"> Clutch</h4>
+                    <h4> Santa Monica Beach</h4>
+                    <h4 > Pacific Park</h4>
+                    <h4> Downtown Santa Monica</h4>
+                </div>
+            </body>
+        </ui:define>
+    </ui:composition>
+</html>

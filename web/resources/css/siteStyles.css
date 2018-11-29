@@ -1,6 +1,6 @@
 /*****************************************************
 *   Cascading Style Sheets (CSS) Style Definitions   *
-*   Composed by Osman Balci for the Movies app.      *
+*   Composed by Osman Laughlin for the Movies app.      *
 *****************************************************/
 
 /*
@@ -16,12 +16,12 @@ html, body {
     https://www.w3schools.com/colors/colors_names.asp
     -----------------------------------------------------------------------
     */
-    /*background-color: thistle;        */ 
+    /* background-color: aliceblue;     */
     /* background-color: azure;         */
     /* background-color: beige;         */
-     background-color: gainsboro;     
+    /* background-color: gainsboro;     */
     /* background-color: ivory;         */
-    /* background-color: linen;         */
+    background-color: white;
     /* background-color: oldlace;       */
     /* background-color: papayawhip;    */
     /* background-color: wheat;         */
@@ -42,14 +42,11 @@ body, p {
 }
 
 /* Style standard HTML tag header 1 */
-h1 {
+/*h1 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12pt;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: none;
+    
     color: maroon;
-}
+}*/
 
 /*
 =======================================
@@ -646,4 +643,45 @@ if content overflows an element's box.
 /* Leave 10px pading on top for the ui-button elements */
 .ui-button {
     margin-top: 10px !important;
+}
+/*
+========================================================
+|   Trying to make this shiz look nice af              |
+|   yeet                                               |
+========================================================
+*/
+.trip-photos {
+    font-size: 15pt;
+    font-family: 'Montserrat', sans-serif;
+    color: pink;
+    text-align: center;
+}
+.trip-title {
+    font-size: 40pt;
+    float:right;
+    font-family: 'Montserrat', sans-serif;
+    margin-right: 200pt;
+
+    color: pink;
+}
+.trip-description {
+    font-size: 18pt;
+    width: 690px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: right;
+    color: grey;
+}
+.texter {
+    float: left;
+    width: 17%;
+    padding: 5px;
+}
+.flight-info {
+    font-family: 'Montserrat', sans-serif;
+    float:bottom;
+    padding-right:300px;
+    border-top: 100px;
+    width:500px;
+    height:100px;
+    padding-bottom: 200px;
 }
