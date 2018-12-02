@@ -1,11 +1,12 @@
 /*
- * Created by William Goodwin on 2018.11.16  * 
+ * Created by William Goodwin on 2018.12.02  * 
  * Copyright © 2018 William Goodwin. All rights reserved. * 
  */
 package edu.vt.managers;
 
 import edu.vt.globals.Methods;
 import edu.vt.pojo.Food;
+import edu.vt.pojo.Hotel;
 import edu.vt.pojo.Trip;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +17,19 @@ import org.primefaces.json.JSONObject;
  *
  * @author WBG
  */
-public class FoodDataManager {
-
-
+public class HotelDataManager {
+    
     private String apiUrl;
 
-    public FoodDataManager() {
-        //Nothin gto initialize
+    public HotelDataManager() {
     }
-
-    public List<Food> nearbyFood(Trip trip){
-        
-        List<Food> foodList = new ArrayList();
+    
+    public List<Hotel> nearbyHotels(Trip trip){
+        List<Food> hotelList = new ArrayList();
         String tripLat = trip.getLatitude();
         String tripLng = trip.getLongitude();
         
-        apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + tripLat + "," + tripLng + "&rankby=distance&type=food&keyword=food&key=AIzaSyCxSNfHEfZ3hpmUiygj_6Fvyhp_i1xHouw";
+        apiUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + tripLat + "," + tripLng + "&rankby=distance&type=hotel&keyword=hotel&key=AIzaSyCxSNfHEfZ3hpmUiygj_6Fvyhp_i1xHouw";
         
         /*
         Redirecting to show a JSF page involves more than one subsequent requests and
@@ -92,7 +90,7 @@ public class FoodDataManager {
                 //Get Rating 
                 String rating = result.optString ("rating", "");
                 
-                foodList.add(new Food(lat, lng, priceLevel, name, rating));
+                //foodList.add(new Food(lat, lng, priceLevel, name, rating));
             }
            
 
@@ -103,14 +101,10 @@ public class FoodDataManager {
         }
         clear();
 
-        return foodList;
-
-        
+        return null;
     }
-    
     
     public void clear(){
         
     }
-    
 }

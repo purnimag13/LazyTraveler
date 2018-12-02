@@ -5,7 +5,8 @@
 package edu.vt.controllers;
 
 import edu.vt.globals.Methods;
-import edu.vt.pojo.Trip;
+import edu.vt.managers.*;
+import edu.vt.pojo.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,9 @@ public class SearchController implements Serializable {
     public void performTripSearch() {
         String apiUrl = makeApiUrl();
         tripsList = initializeTrips(apiUrl);
+        
+        //Initilize all of the data fields
+        this.populateFoodData(tripsList);
 
         
     }
@@ -189,6 +193,20 @@ public class SearchController implements Serializable {
             }
         }
         return front + end;
+    }
+    
+    public void populateFoodData(List<Trip> trips){
+        int numTrips = trips.size();
+        FoodDataManager manager = new FoodDataManager();
+        
+        for (int i = 0; i < numTrips; i++){
+            List<Food> foodList = manager.nearbyFood(trips.get(i));
+            
+            trips.get(i).setFoodList(foodList);
+        }
+        
+        
+        
     }
     
     public void clear(){
