@@ -3,6 +3,7 @@
  * Copyright © 2018 William Goodwin. All rights reserved. * 
  */
 package edu.vt.pojo;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Trip {
     private String name;
     private String cost;
     private String[] photos;
+    private List<Food> foodList;
     private Forecast fiveDayforecast;
 
     public Trip(String lat, String lon, String name, String[] photoArray) {
@@ -41,6 +43,22 @@ public class Trip {
 
     public void setFiveDayforecast(Forecast fiveDayforecast) {
         this.fiveDayforecast = fiveDayforecast;
+    }
+
+    public String[] getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String[] photos) {
+        this.photos = photos;
+    }
+
+    public List<Food> getFoodList() {
+        return foodList;
+    }
+
+    public void setFoodList(List<Food> foodList) {
+        this.foodList = foodList;
     }
 
     
