@@ -170,11 +170,7 @@ public class WeatherDataManager {
             JSONArray jsonArray;
             JSONObject jsonObject;
 
-            /*
-            Country Full Name or Capital City Name search returns a JSON array.
-            Country Code, 2 letters or 3 letters, search returns a JSON object.
-            Therefore, we do the processing by testing the first character.
-             */
+            
             char firstChar = weatherJsonData.charAt(0);
 
             if (firstChar == '[') {
