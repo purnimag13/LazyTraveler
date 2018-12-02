@@ -15,13 +15,16 @@ public class Trip {
     private String longitude;
     private String name;
     private String cost;
+    private String[] photos;
     private Forecast fiveDayforecast;
 
-    public Trip(String lat, String lon, String type, String name) {
-        this.tripType = type;
+    public Trip(String lat, String lon, String name, String[] photoArray) {
+        this.photos = photoArray;
         this.latitude = lat;
         this.longitude = lon;
         this.name = name;
+        
+        
     }
 
     public String getCost() {
