@@ -1,5 +1,4 @@
 /*
-
  * Created by Osman Balci on 2018.06.24
  * Copyright © 2018 Osman Balci. All rights reserved.
  */
