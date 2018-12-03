@@ -16,12 +16,14 @@ public class Trip {
     private String longitude;
     private String name;
     private String cost;
-    private String[] photos;
+    private List<String> photos;
     private List<Food> foodList;
+    private List<Hotel> hotelList;
+    private List<Flight> flightList;
     private Forecast fiveDayforecast;
 
-    public Trip(String lat, String lon, String name, String[] photoArray) {
-        this.photos = photoArray;
+    public Trip(String lat, String lon, String name, List<String> photoList) {
+        this.photos = photoList;
         this.latitude = lat;
         this.longitude = lon;
         this.name = name;
@@ -45,11 +47,11 @@ public class Trip {
         this.fiveDayforecast = fiveDayforecast;
     }
 
-    public String[] getPhotos() {
+    public List<String> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(String[] photos) {
+    public void setPhotos(List<String> photos) {
         this.photos = photos;
     }
 
@@ -93,6 +95,22 @@ public class Trip {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Hotel> getHotelList() {
+        return hotelList;
+    }
+
+    public void setHotelList(List<Hotel> hotelList) {
+        this.hotelList = hotelList;
+    }
+
+    public List<Flight> getFlightList() {
+        return flightList;
+    }
+
+    public void setFlightList(List<Flight> flightList) {
+        this.flightList = flightList;
     }
     
     

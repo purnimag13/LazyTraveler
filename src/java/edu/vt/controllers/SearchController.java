@@ -25,11 +25,15 @@ import org.primefaces.json.JSONObject;
 @Named(value = "searchController")
 public class SearchController implements Serializable {
 
+    ///These fields will be filled by the search dialog box.
     private String searchStr;
     private String tripType;
-    private String season;
     private Integer budget;
-    private Integer numDays;
+    private Integer tripLen;
+    private String startDate;
+    private String startLocation;
+    ////////
+    
     private List<Trip> tripsList;
 
     public SearchController() {
@@ -40,13 +44,7 @@ public class SearchController implements Serializable {
     Getter and Setter Methods
     =========================
      */
-    public String getSeason() {
-        return season;
-    }
 
-    public void setSeason(String season) {
-        this.season = season;
-    }
 
     public Integer getBudget() {
         return budget;
@@ -56,12 +54,36 @@ public class SearchController implements Serializable {
         this.budget = budget;
     }
 
-    public Integer getNumDays() {
-        return numDays;
+    public Integer getTripLen() {
+        return tripLen;
     }
 
-    public void setNumDays(Integer numDays) {
-        this.numDays = numDays;
+    public void setTripLen(Integer tripLen) {
+        this.tripLen = tripLen;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getStartLocation() {
+        return startLocation;
+    }
+
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
+    }
+
+    public List<Trip> getTripsList() {
+        return tripsList;
+    }
+
+    public void setTripsList(List<Trip> tripsList) {
+        this.tripsList = tripsList;
     }
 
     public String getSearchStr() {
@@ -156,11 +178,11 @@ public class SearchController implements Serializable {
                 //Get photo reference
                 JSONArray photosArray = new JSONArray(result.optString("photos", ""));
                 int numPhotos = photosArray.length();
-                String[] photos = new String[numPhotos];
+                List<String> photos = new ArrayList();
                 for (int j = 0; j < numPhotos; j++){
                     JSONObject photoObject = photosArray.getJSONObject(j);
                     String photoRef = photoObject.optString("photo_reference", "");
-                    photos[j] = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photoRef + "&key=AIzaSyCxSNfHEfZ3hpmUiygj_6Fvyhp_i1xHouw";
+                    photos.add("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photoRef + "&key=AIzaSyCxSNfHEfZ3hpmUiygj_6Fvyhp_i1xHouw");
                 }
                 
                 Trip trip = new Trip(lat, lng, name, photos);
