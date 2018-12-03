@@ -233,7 +233,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                     it returns "MovieSearchResults" as the name of the XHTML file to display.
                     -->
                     <p:commandButton value="Search" id="searchButton"  ajax="false" icon="fas fa-search"
-                                     action="/takeTrip/Trip?faces-redirect=true" />
+                                     action="#{searchController.performTripSearch()}" />
                     &nbsp;&nbsp;
 
                     <!-- CANCEL button -->

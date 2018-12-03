@@ -26,8 +26,8 @@ import org.primefaces.json.JSONObject;
 public class SearchController implements Serializable {
 
     ///These fields will be filled by the search dialog box.
-    private String searchStr;
-    private String tripType;
+    private String searchStr = "";
+    private String tripType = "";
     private Integer budget;
     private Integer tripLen;
     private String startDate;
@@ -107,13 +107,13 @@ public class SearchController implements Serializable {
     Instance Methods
     ================
      */
-    public void performTripSearch() {
+    public String performTripSearch() {
         String apiUrl = makeApiUrl();
         tripsList = initializeTrips(apiUrl);
         
         //Initilize all of the data fields
         this.populateFoodData(tripsList);
-
+        return "/takeTrip/Trip?faces-redirect=true";
         
     }
 
