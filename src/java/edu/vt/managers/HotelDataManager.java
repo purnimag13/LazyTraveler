@@ -25,7 +25,7 @@ public class HotelDataManager {
     }
     
     public List<Hotel> nearbyHotels(Trip trip){
-        List<Food> hotelList = new ArrayList();
+        List<Hotel> hotelList = new ArrayList();
         String tripLat = trip.getLatitude();
         String tripLng = trip.getLongitude();
         
@@ -85,12 +85,15 @@ public class HotelDataManager {
                 String name = result.optString("name", "");
                 
                 //Get price level
-                String priceLevel = result.optString ("price_level", "");
+                String priceLevel = result.optString("price_level", "");
                 
                 //Get Rating 
-                String rating = result.optString ("rating", "");
+                String rating = result.optString("rating", "");
                 
-                //foodList.add(new Food(lat, lng, priceLevel, name, rating));
+                //get address
+                String address = result.optString("vicinity", "");
+                
+                hotelList.add(new Hotel(address, rating, priceLevel, name));
             }
            
 
@@ -101,7 +104,7 @@ public class HotelDataManager {
         }
         clear();
 
-        return null;
+        return hotelList;
     }
     
     public void clear(){
