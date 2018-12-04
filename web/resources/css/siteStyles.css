@@ -658,10 +658,9 @@ if content overflows an element's box.
     text-align: center;
 }
 .trip-title {
-    font-size: 40pt;
-    float:right;
+    font-size: 50pt;
+    text-align: center;
     font-family: 'Montserrat', sans-serif;
-    margin-right: 200pt;
 
     color: pink;
 }
@@ -692,9 +691,11 @@ if content overflows an element's box.
 }
 .flight-info {
     font-family: 'Montserrat', sans-serif;
-    
-    border-top: 100px;
-    width:500px;
+    width:400px;
     height:100px;
    
+}
+.left{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 58pt;
 }
