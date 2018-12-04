@@ -26,7 +26,6 @@ import org.json.JSONObject;
  *
  * @author WBG
  */
-
 @Named(value = "flightDataManager")
 
 public class FlightDataManager {
@@ -36,18 +35,20 @@ public class FlightDataManager {
     private List<Flight> flightList;
     private String address;
     private String city;
-    private String startDate;
-    private String startLocation;
+    private String startDate = " ";
+    private String startLocation = " ";
     private String inboundDate;
     private String outboundDate;
     private Integer tripLen;
 
-    public FlightDataManager(){}
-    
-    public FlightDataManager(Integer tripLength, String address, String city) {
+    public FlightDataManager() {
+    }
+
+    public FlightDataManager(Integer tripLength, String address, String city, String startDate) {
         this.tripLen = tripLength;
         this.city = city;
         this.address = address;
+        this.startDate = startDate;
     }
 
     public List<String> getDepartureCodes() {
@@ -130,9 +131,6 @@ public class FlightDataManager {
         this.tripLen = tripLen;
     }
 
-    
-    
-    
     /**
      * Call this method to populate the departureCodes List.
      *
@@ -233,56 +231,103 @@ public class FlightDataManager {
         }
 
     }
-    
-    public void formatStartLocation(String add, String city){
+
+    public void formatStartLocation(String add, String city) {
         String start = add + " " + city;
         this.startLocation = start;
     }
-    
-    public void formatInboundDate(String date){
-        String inbound = date.substring(0, 2) + "-" + date.substring(3, 5) + "-" + date.substring(6, 10);
+
+    public void formatInboundDate(String date) {
+        String[] temp = date.split(" ");
+        String monthAsNum = " ";
+        if (temp[1].equals("Jan")) {
+            monthAsNum = "01";
+        } else if (temp[1].equals("Feb")) {
+            monthAsNum = "02";
+        } else if (temp[1].equals("Mar")) {
+            monthAsNum = "03";
+        } else if (temp[1].equals("Apr")) {
+            monthAsNum = "04";
+        } else if (temp[1].equals("May")) {
+            monthAsNum = "05";
+        } else if (temp[1].equals("Jun")) {
+            monthAsNum = "06";
+        } else if (temp[1].equals("Jul")) {
+            monthAsNum = "07";
+        } else if (temp[1].equals("Aug")) {
+            monthAsNum = "08";
+        } else if (temp[1].equals("Sep")) {
+            monthAsNum = "09";
+        } else if (temp[1].equals("Oct")) {
+            monthAsNum = "10";
+        } else if (temp[1].equals("Nov")) {
+            monthAsNum = "11";
+        } else if (temp[1].equals("Dec")) {
+            monthAsNum = "12";
+        }
+        String inbound = temp[5] + "-" + monthAsNum + "-" + temp[2];
         this.inboundDate = inbound;
     }
-    
-    public void formatOutboundDate(Integer tripLength, String inboundDate){
-        int endDate = ((Integer.parseInt((inboundDate.substring(3, 5))) + tripLength) % 30);
-        this.outboundDate = (String)(endDate + "");
+
+    public void formatOutboundDate(Integer tripLength, String inboundDate) {
+        String[] temp = inboundDate.split("-");
+        Integer day = Integer.parseInt(temp[2]);
+        Integer month = Integer.parseInt(temp[1]);
+        Integer year = Integer.parseInt(temp[0]);
+        if (day + tripLength > 30) {
+            if (month + 1 > 12) {
+                year += 1;
+            } else {
+                month += 1;
+            }
+        } else {
+            day += tripLength;
+        }
+        StringBuilder build = new StringBuilder();
+        build.append(year);
+        build.append("-");
+        build.append(month);
+        build.append("-");
+        build.append(day);
+        this.outboundDate = build.toString();
     }
-       
-    
-    
+
     public List<Flight> findFlights(Trip trip) {
+        flightList = new ArrayList<>();
         this.formatInboundDate(startDate);
         this.formatOutboundDate(tripLen, inboundDate);
         this.formatStartLocation(address, city);
-        
+
         String[] coords = this.startCoordinates(startLocation);
         this.findDepartureCodes(coords[0], coords[1]);
         this.findArrivalCodes(trip);
-        
-        try {
-            int departListSize = departureCodes.size();
-            int arrivalListSize = arrivalCodes.size();
-            
-            for (int i = 0; i < departListSize; i++) {
-                for (int j = 0; j < arrivalListSize; j++) {
+        int departListSize = 1;
+        int arrivalListSize = 1;
+        for (int i = 0; i < departListSize; i++) {
+            for (int j = 0; j < arrivalListSize; j++) {
+                try {
 
                     HttpResponse<JsonNode> response = Unirest.post("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0")
                             .header("X-RapidAPI-Key", "fsr5w8PpIrmshHMJMjS4tzJnByRcp1m3ltPjsn0cwo7Tq3WwLT")
                             .header("Content-Type", "application/x-www-form-urlencoded")
-                            .field("inboundDate", inboundDate)
+                            .field("cabinClass", "business")
+                            .field("inboundDate", outboundDate)
                             .field("children", 0)
                             .field("infants", 0)
                             .field("groupPricing", "false")
                             .field("country", "US")
                             .field("currency", "USD")
                             .field("locale", "en-US")
-                            .field("originPlace", departureCodes.get(i) + "-sky")
-                            .field("destinationPlace", arrivalCodes.get(j) + "-sky")
-                            .field("outboundDate", outboundDate)
+                            .field("originPlace", "SFO-sky")
+                            .field("destinationPlace", "LHR-sky")
+                            .field("outboundDate", inboundDate)
                             .field("adults", 1)
                             .asJson();
                     String locationStr = response.getHeaders().getFirst("Location");
+                    if (locationStr == null)
+                    {
+                        continue;
+                    }
 
                     //CmRaAAAAUZWsp1RaxwtIv_rBGxUbH0VdpTHzBlzIUODuam9g34bIVuVS4Nx0q2qdEwfUolywT0Pk0mjAMnhTo-0Qa41DVrc3FzIfVKumVUeHRTHYGksy7rLDy2f23QLxutK3pdqQEhCTHMQILcYlc3SFQPVkyZ71GhQhsBn-yW5mRKSAjwCZbgyx0LNpKg
                     //http://partners.api.skyscanner.net/apiservices/pricing/uk1/v1.0/e38fe850-15b4-444c-a001-25791a607c83
@@ -294,37 +339,40 @@ public class FlightDataManager {
                             .header("X-RapidAPI-Key", "fsr5w8PpIrmshHMJMjS4tzJnByRcp1m3ltPjsn0cwo7Tq3WwLT")
                             .asJson();
                     JsonNode responseBody = flightResponse.getBody();
-                    
+
                     JSONObject results = responseBody.getObject();
                     JSONArray flightsArray = new JSONArray(results.optString("Itineraries", ""));
-                    if (flightsArray.length() != 0){
-                        
-                        for (int k = 0; k < 1; k++){
-                            
+                    if (flightsArray.length() != 0) {
+
+                        for (int k = 0; k < 1; k++) {
+
                             JSONObject itinerary = flightsArray.getJSONObject(k);
                             JSONArray pricingArray = itinerary.getJSONArray("PricingOptions");
                             JSONObject flightInfo = pricingArray.getJSONObject(0);
-                            
+
                             String price = flightInfo.optString("Price", "");
                             String url = flightInfo.optString("DeeplinkUrl", "");
                             
-                            flightList.add(new Flight(url, price));
                             
+                            Flight temp = new Flight(url, price);
+                            flightList.add(temp);
+
                         }
-                        
+
                     }
 
                 }
-            }
-
-        } catch (UnirestException ex) {
+        catch (UnirestException ex) 
+                {
             Logger.getLogger(FlightDataManager.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JSONException ex) {
+        }catch (JSONException ex) 
+                {
             Logger.getLogger(FlightDataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }
+    }
         return flightList;
     }
-
 
     public String[] startCoordinates(String location) {
 
@@ -405,7 +453,5 @@ public class FlightDataManager {
         return coordinates;
 
     }
-
-
 
 }

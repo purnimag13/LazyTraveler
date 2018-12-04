@@ -699,3 +699,20 @@ if content overflows an element's box.
     font-family: 'Montserrat', sans-serif;
     font-size: 58pt;
 }
+.logo {
+        width: 5%
+    }
+ 
+    .detail {
+        width: 95%;
+        padding-left: 25px;
+    }
+ 
+    .detail td {
+        font-size: 24px;
+    }
+    .sampleThing {
+        color: pink;
+        font-size: 30px;
+        
+    }

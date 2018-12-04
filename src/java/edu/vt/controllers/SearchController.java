@@ -280,7 +280,7 @@ public class SearchController implements Serializable {
      */
     
     public List<Flight> getTripFlights(Trip trip){
-        FlightDataManager flightManager = new FlightDataManager(tripLen, address, city);
+        FlightDataManager flightManager = new FlightDataManager(tripLen, address, city, startDate);
         flightList = flightManager.findFlights(trip);
         return flightList;
     }
