@@ -233,7 +233,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <h:outputLabel for="searchQueryField" value="Home Address:" />
                             </th>
                             <th align="right">
-                                <p:inputText id="searchAddress" value="#{countrySearchController.searchString}" 
+                                <p:inputText id="searchAddress" value="#{searchController.address}" 
                                              required="true" requiredMessage="Please Enter an Address!"
                                              placeholder="Enter Your Address" >
                                     <f:validateLength minimum="2" />
@@ -245,7 +245,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <h:outputLabel for="searchQueryField" value="Home City:" />
                             </th>
                             <th align="right">
-                                <p:inputText id="searchCity" value="#{countrySearchController.searchString}" 
+                                <p:inputText id="searchCity" value="#{searchController.city}" 
                                              required="true" requiredMessage="Please Enter a City!"
                                              placeholder="Enter Your City" >
                                     <f:validateLength minimum="2" />

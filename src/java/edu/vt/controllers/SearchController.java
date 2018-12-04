@@ -34,6 +34,8 @@ public class SearchController implements Serializable {
     private Integer tripLen;
     private String startDate;
     private String startLocation;
+    private String address;
+    private String city;
     private Trip selected;
     private String description;
     ////////
@@ -41,6 +43,7 @@ public class SearchController implements Serializable {
     private List<Trip> tripsList;
     private List<Food> foodList;
     private List<Hotel> hotelList;
+    private List<Flight> flightList;
 
     private List<String> beachLocations = new ArrayList<>();
     private List<String> mountainLocations = new ArrayList<>();
@@ -54,6 +57,22 @@ public class SearchController implements Serializable {
 
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+    
     public String getLocationTemp() {
         return locationTemp;
     }
@@ -259,6 +278,13 @@ public class SearchController implements Serializable {
     Instance Methods
     ================
      */
+    
+    public List<Flight> getTripFlights(Trip trip){
+        FlightDataManager flightManager = new FlightDataManager(tripLen, address, city, startDate);
+        flightList = flightManager.findFlights(trip);
+        return flightList;
+    }
+    
     public List<Food> getTripFood(Trip trip) {
         List<Trip> tripList = getTripsList();
         String tripName = trip.getName();
