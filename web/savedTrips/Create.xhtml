@@ -33,7 +33,10 @@
                         <p:outputLabel value="#{bundle.CreateSavedTripsLabel_events}" for="events" />
                         <p:inputTextarea rows="4" cols="30" id="events" value="#{savedTripsController.selected.events}" title="#{bundle.CreateSavedTripsTitle_events}" required="true" requiredMessage="#{bundle.CreateSavedTripsRequiredMessage_events}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{savedTripsController.create}" value="#{bundle.Save}" update="display,:SavedTripsListForm:datalist,:growl" oncomplete="handleSubmit(args,'SavedTripsCreateDialog');"/>
+                    <p:commandButton actionListener="#{savedTripsController.create}" 
+                                     value="#{bundle.Save}" 
+                                     update="display,:SavedTripsListForm:datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
+                                     oncomplete="handleSubmit(args,'SavedTripsCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SavedTripsCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

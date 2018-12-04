@@ -9,7 +9,8 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="/template/siteTemplate.xhtml">
         <ui:define name="editableContent">
             <h:head>
@@ -67,14 +68,20 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
                         <h:outputText value="#{item.name}"> </h:outputText>
                     </p:dataList>
                 </div>
-                <p:commandButton id="shareButton" icon="fas fa-save"  value="Save" 
-                                 actionListener="#{savedTripsController.saveTrip(searchController.selected.name, searchController.selected.foodList)}" 
-                                 update="datalist,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage">
+                <h:form id="ShareForm">
+                    <c:if test="#{userController.isLoggedIn() == true}">
+                        <p:commandButton id="shareButton" icon="fas fa-save"  value="Save" 
+                                         action="#{savedTripsController.saveTrip(searchController.selected.name, searchController.selected.foodList)}" 
+                                         update="data1,:growlInfoMessage,:growlWarningMessage,:growlErrorMessage,:growlFatalMessage" 
+                                         >
 
-                    <p:confirm header="Share Confirmation" 
-                               message="Are you sure you want to add this trip to your saved trips?" 
-                               icon="fas fa-exclamation-triangle fa-2x" />    
-                </p:commandButton>
+                            <p:confirm header="Share Confirmation" 
+                                       message="Are you sure you want to add the selected to Signed In User's List of Favorite Youtube Videos?" 
+                                       icon="fas fa-exclamation-triangle fa-2x" />
+                        </p:commandButton>
+                    </c:if>
+                </h:form>
+
             </body>
         </ui:define>
     </ui:composition>

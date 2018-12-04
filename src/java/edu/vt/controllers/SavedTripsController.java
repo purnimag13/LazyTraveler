@@ -4,6 +4,7 @@ import edu.vt.EntityBeans.SavedTrips;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.SavedTripsFacade;
+import edu.vt.globals.Methods;
 import edu.vt.pojo.Food;
 
 import java.io.Serializable;
@@ -69,15 +70,34 @@ public class SavedTripsController implements Serializable {
         this.create();
     }
     
-    public SavedTrips prepareCreate() {
+    public SavedTrips prepareCreate() {        
+        /*
+        Instantiate a new PublicVideo object and store its object reference into
+        instance variable 'selected'. The PublicVideo class is defined in PublicVideo.java
+         */
         selected = new SavedTrips();
-        initializeEmbeddableKey();
+
+        // Return the object reference of the newly created PublicVideo object
         return selected;
     }
 
-    public void create() {
+    public void create() {        
+        /*
+        We need to preserve the messages since we will redirect to show a
+        different JSF page after successful creation of the publicVideo.
+         */
+        Methods.preserveMessages();
+        /*
+        Show the message "PublicVideo was Successfully Created!" given in
+        the Bundle.properties file under the PublicVideoCreated keyword.
+
+        Prevent displaying the same msg twice, one for Summary and one for Detail, by setting the 
+        message Detail to "" in the addSuccessMessage(String msg) method in the jsfUtil.java file.
+         */
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("SavedTripsCreated"));
         if (!JsfUtil.isValidationFailed()) {
+            // No JSF validation error. The CREATE operation is successfully performed.
+            selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
