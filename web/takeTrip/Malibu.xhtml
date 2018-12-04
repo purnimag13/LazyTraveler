@@ -19,28 +19,27 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </h:head>
             <body>
-                <h:outputText class="trip-title" value="#{searchController.selected.name}"> </h:outputText>
+                <center><h:outputText class="trip-title" value="#{searchController.selected.name}"> </h:outputText></center>
+
                 <div>
                     <p:graphicImage value="#{searchController.selected.photos.get(0)}" 
                                     style="width:400px;height:400px"></p:graphicImage>
+                    <div class="flight">
+                        <div style="font-family: 'Montserrat', sans-serif">
+                            <div>
+                                <h2>Flight Information</h2>
 
-                </div>
-                <div class="flight">
-                    <div style="font-family: 'Montserrat', sans-serif">
-                        <div>
-                            <h2>Flight Information</h2>
+                            </div>
+                        </div>
+                        <div class="flight-info">
+                            <span > Depart: 7:05 am - 11:39 am&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;7h 34m (1 stop)</span>
+                            <span style="font-size: 12px"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Delta&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IAD - 39m in ATL Layover - LAX</span>
+                            <span style=""> Return: 11:35 pm - 9:11 am &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;6h 36m (1 stop) </span>
+                            <span style="font-size: 12px">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Delta&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;LAX - 48m in ATL Layover- IAD</span>
 
                         </div>
                     </div>
-                    <div class="flight-info">
-                        <span > Depart: 7:05 am - 11:39 am&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;7h 34m (1 stop)</span>
-                        <span style="font-size: 12px"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Delta&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;IAD - 39m in ATL Layover - LAX</span>
-                        <span style=""> Return: 11:35 pm - 9:11 am &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;6h 36m (1 stop) </span>
-                        <span style="font-size: 12px">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Delta&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;LAX - 48m in ATL Layover- IAD</span>
-
-                    </div>
                 </div>
-                 
                 <div class="data">
                     <p:dataList id="data1" value="#{searchController.getTripFood(searchController.selected)}" var="item"
                                 paginator="true"
@@ -59,7 +58,6 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
                         <h:outputText value="#{item.name}"> </h:outputText>
                     </p:dataList>
                 </div>
-
             </body>
         </ui:define>
     </ui:composition>
