@@ -665,6 +665,23 @@ if content overflows an element's box.
 
     color: pink;
 }
+.flight {
+    font-size: 15pt;
+    float:right;
+    font-family: 'Montserrat', sans-serif;
+    margin-right: 200pt;
+
+    color: black;
+}
+.data {
+    width: fit-content; 
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
 .trip-description {
     font-size: 18pt;
     width: 690px;
