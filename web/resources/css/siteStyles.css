@@ -669,19 +669,15 @@ if content overflows an element's box.
     font-size: 15pt;
     float:right;
     font-family: 'Montserrat', sans-serif;
-    margin-right: 200pt;
+    padding-bottom: 500px;
+/*    margin-bottom: 500px;*/
 
     color: black;
 }
 .data {
     width: fit-content; 
 }
-.left {
-    float: left;
-}
-.right {
-    float: right;
-}
+
 .trip-description {
     font-size: 18pt;
     width: 690px;
@@ -696,10 +692,9 @@ if content overflows an element's box.
 }
 .flight-info {
     font-family: 'Montserrat', sans-serif;
-    float:bottom;
-    padding-right:300px;
+    
     border-top: 100px;
     width:500px;
     height:100px;
-    padding-bottom: 200px;
+   
 }

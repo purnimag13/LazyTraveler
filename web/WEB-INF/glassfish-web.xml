@@ -40,6 +40,6 @@ This file is used to configure a web application (WAR file).
     <property name="alternatedocroot_1" value="from=/UserPhotoStorage/* dir=C:/Users/Balci/DocRoot" />
   -->
 
-  <property name="alternatedocroot_1" value="from=/LazyTraveler/* dir=/Users/purni/DocRoot" />
+  <property name="alternatedocroot_1" value="from=/LazyTraveler/* dir=/Users/taralaughlin/DocRoot" />
   
 </glassfish-web-app>
