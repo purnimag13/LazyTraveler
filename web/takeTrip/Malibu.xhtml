@@ -57,6 +57,15 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
                         <f:facet name="header">Hotel Choices</f:facet>
                         <h:outputText value="#{item.name}"> </h:outputText>
                     </p:dataList>
+                    <p:dataList id="data3" value="#{flightDataManager.findFlights(flightDataManager.inboundDate, flightDataManager.outboundDate,
+                                                    searchController.selected, flightDataManager.startLocation)}" var="item"
+                                paginator="true"
+                                rows="5"
+                                rowsPerPageTemplate="5,10,15,20"
+                                class="right"> 
+                        <f:facet name="header">Hotel Choices</f:facet>
+                        <h:outputText value="#{item.name}"> </h:outputText>
+                    </p:dataList>
                 </div>
             </body>
         </ui:define>

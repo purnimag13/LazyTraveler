@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.inject.Named;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,12 +26,24 @@ import org.json.JSONObject;
  *
  * @author WBG
  */
+
+@Named(value = "flightDataManager")
+
 public class FlightDataManager {
 
     private List<String> departureCodes;
     private List<String> arrivalCodes;
     private List<Flight> flightList;
+    private String address;
+    private String city;
+    private String startDate;
+    private String startLocation;
+    private String inboundDate;
+    private String outboundDate;
 
+    
+    
+    
     /**
      * Call this method to populate the departureCodes List.
      *
@@ -131,7 +144,24 @@ public class FlightDataManager {
         }
 
     }
-
+    
+    public void formatStartLocation(String add, String city){
+        String start = add + " " + city;
+        this.startLocation = start;
+    }
+    
+    public void formatInboundDate(String date){
+        String inbound = date.substring(0, 2) + "-" + date.substring(3, 5) + "-" + date.substring(6, 10);
+        this.inboundDate = inbound;
+    }
+    
+    public void formatOutboundDate(String tripLength, String inboundDate){
+        int endDate = ((Integer.parseInt((inboundDate.substring(3, 5))) + Integer.parseInt(tripLength)) % 30);
+        this.outboundDate = (String)(endDate + "");
+    }
+       
+    
+    
     public List<Flight> findFlights(String inboundDate, String outboundDate, Trip trip, String startLocation) {
         
         String[] coords = this.startCoordinates(startLocation);
