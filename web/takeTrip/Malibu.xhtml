@@ -13,11 +13,12 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
         <ui:define name="editableContent">
             <h:head>
                 <title>Malibu Weekend Trip</title>
-                <h1 class="trip-title"> Malibu Beach</h1>
+                
                 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </h:head>
             <body>
+                <h:outputText class="trip-title" value="#{searchController.selected.name}"> </h:outputText>
 
                 <div class="trip-title">
 

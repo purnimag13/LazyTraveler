@@ -34,6 +34,7 @@ public class SearchController implements Serializable {
     private Integer tripLen;
     private String startDate;
     private String startLocation;
+    private Trip selected;
     ////////
     
     private List<Trip> tripsList;
@@ -147,6 +148,14 @@ public class SearchController implements Serializable {
     =========================
      */
 
+    public Trip getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Trip selected) {
+        this.selected = selected;
+    }
+    
     public List<Hotel> getHotelList() {
         return hotelList;
     }
@@ -241,6 +250,11 @@ public class SearchController implements Serializable {
     Instance Methods
     ================
      */
+    public String testThing()
+    {
+        return "/takeTrip/Malibu?faces-redirect=true";
+    }
+    
     public String performTripSearch() {
         this.makeLocationChoice();
         List<Trip> trips = new ArrayList<>();
