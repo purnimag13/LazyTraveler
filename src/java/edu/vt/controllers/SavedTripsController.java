@@ -4,6 +4,7 @@ import edu.vt.EntityBeans.SavedTrips;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.SavedTripsFacade;
+import edu.vt.pojo.Food;
 
 import java.io.Serializable;
 import java.util.List;
@@ -48,7 +49,26 @@ public class SavedTripsController implements Serializable {
     private SavedTripsFacade getFacade() {
         return ejbFacade;
     }
+    
+//    Instance Methods
 
+    public void saveTrip(String location, List<Food> restaurants) {
+        SavedTrips newTrip = new SavedTrips();
+        java.util.Date date = new java.util.Date(0,0,0);
+        newTrip.setStartDate(date);
+        newTrip.setEvents("");
+        newTrip.setFlightCost(0);
+        newTrip.setHotelCost(0);
+        newTrip.setHotelName("");
+        newTrip.setLocation(location);
+        newTrip.setRestaurants(restaurants.toString());
+        newTrip.setStartDate(date);
+        newTrip.setStartLocation("");
+        
+        this.setSelected(newTrip);
+        this.create();
+    }
+    
     public SavedTrips prepareCreate() {
         selected = new SavedTrips();
         initializeEmbeddableKey();
