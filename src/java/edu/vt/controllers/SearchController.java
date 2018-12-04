@@ -43,6 +43,7 @@ public class SearchController implements Serializable {
     private List<Trip> tripsList;
     private List<Food> foodList;
     private List<Hotel> hotelList;
+    private List<Flight> flightList;
 
     private List<String> beachLocations = new ArrayList<>();
     private List<String> mountainLocations = new ArrayList<>();
@@ -277,6 +278,12 @@ public class SearchController implements Serializable {
     Instance Methods
     ================
      */
+    
+    public List<Flight> getTripFlights(Trip trip){
+        FlightDataManager flightManager = new FlightDataManager(tripLen, address, city);
+        flightList = flightManager.findFlights(trip);
+        return flightList;
+    }
     
     public List<Food> getTripFood(Trip trip) {
         List<Trip> tripList = getTripsList();

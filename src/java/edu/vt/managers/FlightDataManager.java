@@ -40,6 +40,95 @@ public class FlightDataManager {
     private String startLocation;
     private String inboundDate;
     private String outboundDate;
+    private Integer tripLen;
+
+    public FlightDataManager(){}
+    
+    public FlightDataManager(Integer tripLength, String address, String city) {
+        this.tripLen = tripLength;
+        this.city = city;
+        this.address = address;
+    }
+
+    public List<String> getDepartureCodes() {
+        return departureCodes;
+    }
+
+    public void setDepartureCodes(List<String> departureCodes) {
+        this.departureCodes = departureCodes;
+    }
+
+    public List<String> getArrivalCodes() {
+        return arrivalCodes;
+    }
+
+    public void setArrivalCodes(List<String> arrivalCodes) {
+        this.arrivalCodes = arrivalCodes;
+    }
+
+    public List<Flight> getFlightList() {
+        return flightList;
+    }
+
+    public void setFlightList(List<Flight> flightList) {
+        this.flightList = flightList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getStartLocation() {
+        return startLocation;
+    }
+
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
+    }
+
+    public String getInboundDate() {
+        return inboundDate;
+    }
+
+    public void setInboundDate(String inboundDate) {
+        this.inboundDate = inboundDate;
+    }
+
+    public String getOutboundDate() {
+        return outboundDate;
+    }
+
+    public void setOutboundDate(String outboundDate) {
+        this.outboundDate = outboundDate;
+    }
+
+    public Integer getTripLen() {
+        return tripLen;
+    }
+
+    public void setTripLen(Integer tripLen) {
+        this.tripLen = tripLen;
+    }
 
     
     
@@ -155,14 +244,17 @@ public class FlightDataManager {
         this.inboundDate = inbound;
     }
     
-    public void formatOutboundDate(String tripLength, String inboundDate){
-        int endDate = ((Integer.parseInt((inboundDate.substring(3, 5))) + Integer.parseInt(tripLength)) % 30);
+    public void formatOutboundDate(Integer tripLength, String inboundDate){
+        int endDate = ((Integer.parseInt((inboundDate.substring(3, 5))) + tripLength) % 30);
         this.outboundDate = (String)(endDate + "");
     }
        
     
     
-    public List<Flight> findFlights(String inboundDate, String outboundDate, Trip trip, String startLocation) {
+    public List<Flight> findFlights(Trip trip) {
+        this.formatInboundDate(startDate);
+        this.formatOutboundDate(tripLen, inboundDate);
+        this.formatStartLocation(address, city);
         
         String[] coords = this.startCoordinates(startLocation);
         this.findDepartureCodes(coords[0], coords[1]);
