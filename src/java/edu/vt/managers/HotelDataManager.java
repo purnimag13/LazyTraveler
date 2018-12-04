@@ -77,7 +77,7 @@ public class HotelDataManager {
                 
                 //Get Lat and Lng from result
                 JSONObject geometryObject = new JSONObject(result.optString("geometry", ""));
-                JSONObject locationObject = new JSONObject(result.optString("location", ""));
+                JSONObject locationObject = new JSONObject(geometryObject.optString("location", ""));
                 String lat = locationObject.optString("lat", "");
                 String lng = locationObject.optString("lng", "");
                 

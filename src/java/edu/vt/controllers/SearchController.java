@@ -38,6 +38,7 @@ public class SearchController implements Serializable {
     
     private List<Trip> tripsList;
     private List<Food> foodList;
+    private List<Hotel> hotelList;
 
     private List<String> beachLocations = new ArrayList<>();
     private List<String> mountainLocations = new ArrayList<>();
@@ -146,6 +147,14 @@ public class SearchController implements Serializable {
     =========================
      */
 
+    public List<Hotel> getHotelList() {
+        return hotelList;
+    }
+
+    public void setHotelList(List<Hotel> hotelList) {
+        this.hotelList = hotelList;
+    }
+    
     public List<String> getFinalLocations() {
         return finalLocations;
     }
@@ -241,6 +250,7 @@ public class SearchController implements Serializable {
             String apiUrl = makeApiUrl();
             tripsList = initializeTrips(apiUrl, trips);
             foodList = populateFoodData(tripsList);
+            hotelList = populateHotelData(tripsList);
         }
         //Initilize all of the data fields
         return "/takeTrip/Trip?faces-redirect=true";
@@ -423,6 +433,19 @@ public class SearchController implements Serializable {
         }
         
         return foodList;
+    }
+    
+    public List<Hotel> populateHotelData(List<Trip> trips){
+        int numTrips = trips.size();
+        HotelDataManager manager = new HotelDataManager();
+        
+        for (int i = 0; i < numTrips; i++){
+            hotelList = manager.nearbyHotels(trips.get(i));
+            
+            trips.get(i).setHotelList(hotelList);
+        }
+        
+        return hotelList;
     }
     
     public void clear(){
