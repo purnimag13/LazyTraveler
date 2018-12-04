@@ -22,48 +22,29 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
                 <h3 style="font-family: 'Montserrat', sans-serif">Search Results</h3>
                 <h:form id="productListForm">
 
-                    <p:column >
-                        <div class="texter">
-                            <p:graphicImage value="/resources/images/beach/malibu.png" 
-                                            style="width:200px;height:200px"></p:graphicImage>
-                            <div>
-                                <h:commandLink action="/takeTrip/Malibu"
-                                               class="trip-photos">Malibu Beach</h:commandLink>
-                            </div>
-                        </div>
-                    </p:column>
-                    <p:column>
-                        <div class="texter">
-                            <p:graphicImage value="/resources/images/beach/paradise.png" 
-                                            style="width:200px;height:200px"></p:graphicImage>
-                            <div>
-                                <h:commandLink action="/takeTrip/SantaMonica"
-                                               class="trip-photos">Santa Monica</h:commandLink>
-                            </div>
-                        </div>
-                    </p:column>
-                    <p:column>
-                        <div class="texter">
-                            <p:graphicImage value="/resources/images/beach/longbeach.png" 
-                                            style="width:200px;height:200px"></p:graphicImage>
-                            <div>
-                                <h:commandLink action="/takeTrip/Long"
-                                               class="trip-photos">Long Beach</h:commandLink> 
-                            </div>
-                        </div>
+                    <p:dataTable id="datalist" value="#{searchController.tripsList}" var="item"
+                                 selectionMode = "single" selection="#{searchController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.latitude}"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,15,20"
+                                 class="dataTable" >
 
-                    </p:column>
-                    <p:column >
-                        <div class="texter">
-                            <p:graphicImage value="/resources/images/beach/naples.png" 
-                                            style="width:200px;height:200px"></p:graphicImage>
-                            <div>
-                                <h:commandLink action="/takeTrip/Naples"
-                                               class="trip-photos">Naples Beach</h:commandLink>
-                            </div>
-                        </div>
-
-                    </p:column>
+                        <p:column headerText="Category Name" style="width:120px;text-align:center;" 
+                                  exportFunction="#{item.photos.get(0)}">
+                            <p:graphicImage url="#{item.photos.get(0)}" styleClass="content" />
+                        </p:column>
+                        <p:column headerText="Name" style="width:120px;text-align:center;" 
+                                  exportFunction="#{item.name}">
+                            
+                            <h:commandLink value="#{searchController.selected}" action="/takeTrip/Malibu">
+                            <f:setPropertyActionListener target="#{searchController.selected}" value="#{item}" />
+                            <h:outputText value="#{item.name}"></h:outputText>
+                            </h:commandLink>
+                            
+                        </p:column>
+                        
+                    </p:dataTable>
                     <div>
                         <p:column >
                             <h:head>

@@ -181,9 +181,19 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <h:outputLabel for="searchQueryField" value="Search:" />
                             </th>
                             <th align="right">
-                                <p:inputText id="searchQueryField" style="width:200px" placeholder="Enter search string"
-                                             required="true" requiredMessage="Please Enter a Search String!"
-                                             value=" " />
+                                
+                                <p:selectOneMenu id="searchQueryField" value="#{searchController.locationTemp}"
+                                                 required="true" requiredMessage="Please Choose Location!" 
+                                                 class="standardText" >
+
+                                    <f:selectItem itemLabel="Select Trip Location"  itemValue="" noSelectionOption="true"/>
+                                    <f:selectItem itemLabel="Beach"          itemValue="Beach" />
+                                    <f:selectItem itemLabel="Mountain"          itemValue="Mountain" />
+                                    <f:selectItem itemLabel="Desert"            itemValue="Desert" />
+                                    <f:selectItem itemLabel="Snow"          itemValue="Snow" />
+                                    <f:selectItem itemLabel="Forest"          itemValue="Forest" />
+                                    <f:selectItem itemLabel="City"          itemValue="City" />
+                                </p:selectOneMenu>
                             </th>
                         </tr>
                         <tr>
@@ -192,7 +202,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                             </th>
                             <th align="right">
                                 <!--Dropdown search options -->
-                                <p:selectOneMenu id="tripLabel" value="Please Select a trip length!"
+                                <p:selectOneMenu id="tripLabel" value="#{searchController.tripLen}"
                                                  required="true" requiredMessage="Please Select a trip length!" 
                                                  class="standardText" >
 
@@ -213,27 +223,15 @@ Copyright © 2018 Osman Balci. All rights reserved.
                             <th align="right">
                                 <!--Dropdown search options -->
                                 <p:calendar id="datePublished" placeholder="MM/dd/yyyy" pattern="MM/dd/yyyy" class="inputTextField" mask="true"
-                                    value="Start Date:" 
+                                            value="#{searchController.startDate}" 
                                     required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_datePublished}" />
                             </th>
                             
                         </tr>
-                        
-
-
+                       
                     </table>
-
-                    <!--  SEARCH button:
-                    Clicking the Search button invokes the performSearch() method of the
-                    searchedMovieController CDI @Named bean. The performSearch() method executes
-                    the search for the searchQuery property value and at the end of the execution with
-                    
-                        return "MovieSearchResults?faces-redirect=true";
-                    
-                    it returns "MovieSearchResults" as the name of the XHTML file to display.
-                    -->
                     <p:commandButton value="Search" id="searchButton"  ajax="false" icon="fas fa-search"
-                                     action="/takeTrip/Trip?faces-redirect=true" />
+                                     action="#{searchController.performTripSearch()}" />
                     &nbsp;&nbsp;
 
                     <!-- CANCEL button -->
