@@ -9,6 +9,7 @@ import edu.vt.managers.*;
 import edu.vt.pojo.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -27,6 +28,7 @@ public class SearchController implements Serializable {
 
     ///These fields will be filled by the search dialog box.
     private String searchStr = "";
+    private String locationTemp = "";
     private String tripType = "";
     private Integer budget;
     private Integer tripLen;
@@ -35,16 +37,139 @@ public class SearchController implements Serializable {
     ////////
     
     private List<Trip> tripsList;
+    private List<Food> foodList;
 
+    private List<String> beachLocations = new ArrayList<>();
+    private List<String> mountainLocations = new ArrayList<>();
+    private List<String> desertLocations = new ArrayList<>();
+    private List<String> snowLocations = new ArrayList<>();
+    private List<String> forestLocations = new ArrayList<>();
+    private List<String> cityLocations = new ArrayList<>();
+    private List<String> finalLocations = new ArrayList<>();
+    
     public SearchController() {
+   
     }
 
+    
+    public String getLocationTemp() {
+        return locationTemp;
+    }
+
+    public List<String> getBeachLocations() {    
+        return beachLocations;
+    }
+
+    public void setBeachLocations(List<String> beachLocations) {
+        this.beachLocations = beachLocations;
+    }
+
+    public List<String> getMountainLocations() {
+        return mountainLocations;
+    }
+
+    public void setMountainLocations(List<String> mountainLocations) {
+        this.mountainLocations = mountainLocations;
+    }
+
+    public List<String> getDesertLocations() {
+        return desertLocations;
+    }
+
+    public void setDesertLocations(List<String> desertLocations) {
+        this.desertLocations = desertLocations;
+    }
+
+    public List<String> getSnowLocations() {
+        return snowLocations;
+    }
+
+    public void setSnowLocations(List<String> snowLocations) {
+        this.snowLocations = snowLocations;
+    }
+
+    public List<String> getForestLocations() {
+        return forestLocations;
+    }
+
+    public void setForestLocations(List<String> forestLocations) {
+        this.forestLocations = forestLocations;
+    }
+
+    public List<String> getCityLocations() {
+        return cityLocations;
+    }
+    public void generateLocations()
+    {
+        beachLocations.add("California");
+        beachLocations.add("Miami Beach");
+        beachLocations.add("Florida");
+        beachLocations.add("Bondi Beach");
+        beachLocations.add("Daytona");
+        beachLocations.add("Malibu");
+        beachLocations.add("Cancun");
+        beachLocations.add("Long Beach");
+        
+        mountainLocations.add("Andes");
+        mountainLocations.add("Colorado");
+        mountainLocations.add("Seattle");
+        mountainLocations.add("Denver");
+        mountainLocations.add("Vermont");
+        mountainLocations.add("Great Smoky Mountains");
+        
+        desertLocations.add("Egypt");
+        desertLocations.add("Africa");
+        desertLocations.add("Sahara");
+        desertLocations.add("Arizona");
+        
+        snowLocations.add("Canada");
+        snowLocations.add("Vermont");
+        snowLocations.add("Breckenridge");
+        snowLocations.add("Switzerland");
+        snowLocations.add("Russia");
+        
+        forestLocations.add("Orick");
+        forestLocations.add("Eastsound");
+        forestLocations.add("Gatlinburg");
+        forestLocations.add("Thailand");
+        
+        cityLocations.add("Las Vegas");
+        cityLocations.add("New York City");
+        cityLocations.add("Paris");
+        cityLocations.add("Washington");
+        cityLocations.add("Beijing");
+        
+    }
     /*
     =========================
     Getter and Setter Methods
     =========================
      */
 
+    public List<String> getFinalLocations() {
+        return finalLocations;
+    }
+
+    public void setFinalLocations(List<String> finalLocations) {
+        this.finalLocations = finalLocations;
+    }
+    
+    public void setCityLocations(List<String> cityLocations) {
+        this.cityLocations = cityLocations;    
+    }
+
+    public void setLocationTemp(String locationTemp) {
+        this.locationTemp = locationTemp;
+    }
+
+    public List<Food> getFoodList() {
+        return foodList;
+    }
+
+    public void setFoodList(List<Food> foodList) {
+        this.foodList = foodList;
+    }
+    
 
     public Integer getBudget() {
         return budget;
@@ -108,18 +233,88 @@ public class SearchController implements Serializable {
     ================
      */
     public String performTripSearch() {
-        String apiUrl = makeApiUrl();
-        tripsList = initializeTrips(apiUrl);
-        
+        this.makeLocationChoice();
+        List<Trip> trips = new ArrayList<>();
+        for (int i = 0; i < 3; i++)
+        {
+            searchStr = finalLocations.get(i);
+            String apiUrl = makeApiUrl();
+            tripsList = initializeTrips(apiUrl, trips);
+            foodList = populateFoodData(tripsList);
+        }
         //Initilize all of the data fields
-        this.populateFoodData(tripsList);
         return "/takeTrip/Trip?faces-redirect=true";
         
     }
 
-    public List<Trip> initializeTrips(String apiUrl) {
+    public void makeLocationChoice()
+    {
+        this.generateLocations();
+        if (locationTemp.equals("Beach"))
+        {
+            List<String> copy = new ArrayList<>(beachLocations);
+            Collections.shuffle(copy);
+            copy.subList(0, 3);
+            for (int i = 0; i < 3; i++)
+            {
+                finalLocations.add(copy.get(i));
+            }
+        }
+        else if(locationTemp.equals("Desert"))
+        {
+            List<String> copy = new ArrayList<>(desertLocations);
+            Collections.shuffle(copy);
+            copy.subList(0, 3);
+            for (int i = 0; i < 3; i++)
+            {
+                finalLocations.add(copy.get(i));
+            }
+        }
+        else if(locationTemp.equals("Mountain"))
+        {
+            List<String> copy = new ArrayList<>(mountainLocations);
+            Collections.shuffle(copy);
+            copy.subList(0, 3);
+            for (int i = 0; i < 3; i++)
+            {
+                finalLocations.add(copy.get(i));
+            }
+        }
+        else if(locationTemp.equals("Snow"))
+        {
+            List<String> copy = new ArrayList<>(snowLocations);
+            Collections.shuffle(copy);
+            copy.subList(0, 3);
+            for (int i = 0; i < 3; i++)
+            {
+                finalLocations.add(copy.get(i));
+            }
+        }
+        else if(locationTemp.equals("Forest"))
+        {
+            List<String> copy = new ArrayList<>(forestLocations);
+            Collections.shuffle(copy);
+            copy.subList(0, 3);
+            for (int i = 0; i < 3; i++)
+            {
+                finalLocations.add(copy.get(i));
+            }
+        }
+        else if(locationTemp.equals("City"))
+        {
+            List<String> copy = new ArrayList<>(cityLocations);
+            Collections.shuffle(copy);
+            copy.subList(0, 3);
+            for (int i = 0; i < 3; i++)
+            {
+                finalLocations.add(copy.get(i));
+            }
+        }
         
-        List<Trip> trips = new ArrayList();
+    }
+    public List<Trip> initializeTrips(String apiUrl, List<Trip> trips) {
+        
+//        List<Trip> trips = new ArrayList();
         
         /*
         Redirecting to show a JSF page involves more than one subsequent requests and
@@ -168,7 +363,7 @@ public class SearchController implements Serializable {
                 
                 //Get Lat and Lng from result
                 JSONObject geometryObject = new JSONObject(result.optString("geometry", ""));
-                JSONObject locationObject = new JSONObject(result.optString("location", ""));
+                JSONObject locationObject = new JSONObject(geometryObject.optString("location", ""));
                 String lat = locationObject.optString("lat", "");
                 String lng = locationObject.optString("lng", "");
                 
@@ -217,18 +412,17 @@ public class SearchController implements Serializable {
         return front + end;
     }
     
-    public void populateFoodData(List<Trip> trips){
+    public List<Food> populateFoodData(List<Trip> trips){
         int numTrips = trips.size();
         FoodDataManager manager = new FoodDataManager();
         
         for (int i = 0; i < numTrips; i++){
-            List<Food> foodList = manager.nearbyFood(trips.get(i));
+            foodList = manager.nearbyFood(trips.get(i));
             
             trips.get(i).setFoodList(foodList);
         }
         
-        
-        
+        return foodList;
     }
     
     public void clear(){

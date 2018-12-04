@@ -79,7 +79,7 @@ public class FoodDataManager {
                 
                 //Get Lat and Lng from result
                 JSONObject geometryObject = new JSONObject(result.optString("geometry", ""));
-                JSONObject locationObject = new JSONObject(result.optString("location", ""));
+                JSONObject locationObject = new JSONObject(geometryObject.optString("location", ""));
                 String lat = locationObject.optString("lat", "");
                 String lng = locationObject.optString("lng", "");
                 
@@ -87,8 +87,15 @@ public class FoodDataManager {
                 String name = result.optString("name", "");
                 
                 //Get price level
-                String priceLevel = result.optString ("price_level", "");
-                
+                String priceLevel = " ";
+                if (result.optString ("price_level", "") == null)
+                {
+                    priceLevel = "not available";
+                }
+                else
+                {
+                    priceLevel = result.optString ("price_level", "");
+                }
                 //Get Rating 
                 String rating = result.optString ("rating", "");
                 

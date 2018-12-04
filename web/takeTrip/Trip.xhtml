@@ -22,7 +22,20 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
                 <h3 style="font-family: 'Montserrat', sans-serif">Search Results</h3>
                 <h:form id="productListForm">
 
-                    <h:outputText class="selectedRecipeTitle" value="#{searchController.tripsList.size}" />
+                    <p:dataTable id="datalist" value="#{searchController.foodList}" var="item"
+                                 paginator="true"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,15,20"
+                                 class="dataTable" >
+
+                        <p:column headerText="Category Name" style="width:120px;text-align:center;" 
+                                  exportFunction="#{item.name}">
+                            <h:outputText class="standardText" value="#{item.name}"/>
+                        </p:column>
+                    </p:dataTable>
+
+
+
                     <p:column >
                         <div class="texter">
                             <p:graphicImage value="/resources/images/beach/malibu.png" 
