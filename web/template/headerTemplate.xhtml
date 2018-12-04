@@ -65,12 +65,12 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                         <p:graphicImage cache="false" class="smallProfilePhoto" 
                                                         value="#{userController.userPhoto()}"/>&nbsp;&nbsp;My Account
                                     </h:link>
-                                    
+
                                     <!-- Clicking "Sign Out" invokes userController's logout() method -->
                                     <h:commandLink action="#{userController.logout()}" class="standardText" >
                                         <i class="fas fa-sign-out-alt"></i>&nbsp;Sign Out
                                     </h:commandLink>
-                                    
+
                                 </c:if>
 
                                 <!-- 
@@ -105,10 +105,10 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <i class="fas fa-home"></i>&nbsp;Home
                                 <f:param name="i" value="0" />
                             </p:menuitem>
-<!--                            <p:menuitem outcome="/takeTrip/Trip" >
-                                <i class="fas fa-home"></i>&nbsp;Test
-                                <f:param name="i" value="0" />
-                            </p:menuitem>-->
+                            <!--                            <p:menuitem outcome="/takeTrip/Trip" >
+                                                            <i class="fas fa-home"></i>&nbsp;Test
+                                                            <f:param name="i" value="0" />
+                                                        </p:menuitem>-->
                             <p:menuitem onclick="PF('TripSearchDialog').show();return false;">
                                 <i class="fas fa-suitcase"/>&nbsp;Take a Trip
                                 <f:param name="i" value="2" />
@@ -141,18 +141,18 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <i class="fas fa-home"></i>&nbsp;Home
                                 <f:param name="i" value="0" />
                             </p:menuitem>
-<!--                            <p:menuitem outcome="/takeTrip/Trip" >
-                                <i class="fas fa-home"></i>&nbsp;Test
-                                <f:param name="i" value="0" />
-                            </p:menuitem>-->
-<!--                            <p:menuitem outcome="/SignIn">
-                                <i class="fas fa-sign-in-alt"></i>&nbsp;Sign In
-                                <f:param name="i" value="1" />
-                            </p:menuitem>
-                            <p:menuitem outcome="/userAccount/CreateAccount">
-                                <i class="fas fa-user-plus"></i>&nbsp;Create an Account
-                                <f:param name="i" value="2" />
-                            </p:menuitem>-->
+                            <!--                            <p:menuitem outcome="/takeTrip/Trip" >
+                                                            <i class="fas fa-home"></i>&nbsp;Test
+                                                            <f:param name="i" value="0" />
+                                                        </p:menuitem>-->
+                            <!--                            <p:menuitem outcome="/SignIn">
+                                                            <i class="fas fa-sign-in-alt"></i>&nbsp;Sign In
+                                                            <f:param name="i" value="1" />
+                                                        </p:menuitem>
+                                                        <p:menuitem outcome="/userAccount/CreateAccount">
+                                                            <i class="fas fa-user-plus"></i>&nbsp;Create an Account
+                                                            <f:param name="i" value="2" />
+                                                        </p:menuitem>-->
                             <p:menuitem onclick="PF('TripSearchDialog').show();return false;">
                                 <i class="fas fa-suitcase"/>&nbsp;Take a Trip
                                 <f:param name="i" value="2" />
@@ -181,7 +181,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <h:outputLabel for="searchQueryField" value="Search:" />
                             </th>
                             <th align="right">
-                                
+
                                 <p:selectOneMenu id="searchQueryField" value="#{searchController.locationTemp}"
                                                  required="true" requiredMessage="Please Choose Location!" 
                                                  class="standardText" >
@@ -217,18 +217,43 @@ Copyright © 2018 Osman Balci. All rights reserved.
                         </tr>
                         <tr>
                             <th align="left">
-                                
+
                                 <h:outputLabel for="searchQueryField" value="Start Date:" />
                             </th>
                             <th align="right">
                                 <!--Dropdown search options -->
                                 <p:calendar id="datePublished" placeholder="MM/dd/yyyy" pattern="MM/dd/yyyy" class="inputTextField" mask="true"
                                             value="#{searchController.startDate}" 
-                                    required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_datePublished}" />
+                                            required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_datePublished}" />
                             </th>
-                            
+
                         </tr>
-                       
+                        <tr>
+                            <th align="left">
+                                <h:outputLabel for="searchQueryField" value="Home Address:" />
+                            </th>
+                            <th align="right">
+                                <p:inputText id="searchAddress" value="#{countrySearchController.searchString}" 
+                                             required="true" requiredMessage="Please Enter an Address!"
+                                             placeholder="Enter Your Address" >
+                                    <f:validateLength minimum="2" />
+                                </p:inputText>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="left">
+                                <h:outputLabel for="searchQueryField" value="Home City:" />
+                            </th>
+                            <th align="right">
+                                <p:inputText id="searchCity" value="#{countrySearchController.searchString}" 
+                                             required="true" requiredMessage="Please Enter a City!"
+                                             placeholder="Enter Your City" >
+                                    <f:validateLength minimum="2" />
+                                </p:inputText>
+                            </th>
+                        </tr>
+
+
                     </table>
                     <p:commandButton value="Search" id="searchButton"  ajax="false" icon="fas fa-search"
                                      action="#{searchController.performTripSearch()}" />
