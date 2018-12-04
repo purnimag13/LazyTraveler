@@ -19,6 +19,27 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
             </h:head>
             <body>
                 <h:outputText class="trip-title" value="#{searchController.selected.name}"> </h:outputText>
+                
+                <p:dataList id="datalist" value="#{searchController.getTripFood(searchController.selected)}" var="item"
+                                 paginator="true"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,15,20"
+                                 class="dataTable"> 
+                    <p:column>
+                        <h:outputText value="#{item.name}"> </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{item.price}"> </h:outputText>
+                    </p:column>
+                </p:dataList>
+                <p:dataList id="data1" value="#{searchController.getTripHotel(searchController.selected)}" var="item"
+                                 paginator="true"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,15,20"
+                                 class="dataTable"> 
+                    <h:outputText value="#{item.name}"> </h:outputText>
+                    <h:outputText value="#{item.priceLevel}"> </h:outputText>
+                </p:dataList>
 
                 <div class="trip-title">
 

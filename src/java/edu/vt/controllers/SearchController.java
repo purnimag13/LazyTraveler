@@ -35,8 +35,9 @@ public class SearchController implements Serializable {
     private String startDate;
     private String startLocation;
     private Trip selected;
+    private String description;
     ////////
-    
+
     private List<Trip> tripsList;
     private List<Food> foodList;
     private List<Hotel> hotelList;
@@ -48,17 +49,16 @@ public class SearchController implements Serializable {
     private List<String> forestLocations = new ArrayList<>();
     private List<String> cityLocations = new ArrayList<>();
     private List<String> finalLocations = new ArrayList<>();
-    
+
     public SearchController() {
-   
+
     }
 
-    
     public String getLocationTemp() {
         return locationTemp;
     }
 
-    public List<String> getBeachLocations() {    
+    public List<String> getBeachLocations() {
         return beachLocations;
     }
 
@@ -101,8 +101,8 @@ public class SearchController implements Serializable {
     public List<String> getCityLocations() {
         return cityLocations;
     }
-    public void generateLocations()
-    {
+
+    public void generateLocations() {
         beachLocations.add("California");
         beachLocations.add("Miami Beach");
         beachLocations.add("Florida");
@@ -111,42 +111,52 @@ public class SearchController implements Serializable {
         beachLocations.add("Malibu");
         beachLocations.add("Cancun");
         beachLocations.add("Long Beach");
-        
+
         mountainLocations.add("Andes");
         mountainLocations.add("Colorado");
         mountainLocations.add("Seattle");
         mountainLocations.add("Denver");
         mountainLocations.add("Vermont");
         mountainLocations.add("Great Smoky Mountains");
-        
+
         desertLocations.add("Egypt");
         desertLocations.add("Africa");
         desertLocations.add("Sahara");
         desertLocations.add("Arizona");
-        
+
         snowLocations.add("Canada");
         snowLocations.add("Vermont");
         snowLocations.add("Breckenridge");
         snowLocations.add("Switzerland");
         snowLocations.add("Russia");
-        
+
         forestLocations.add("Orick");
         forestLocations.add("Eastsound");
         forestLocations.add("Gatlinburg");
         forestLocations.add("Thailand");
-        
+
         cityLocations.add("Las Vegas");
         cityLocations.add("New York City");
         cityLocations.add("Paris");
         cityLocations.add("Washington");
         cityLocations.add("Beijing");
-        
+
     }
+
     /*
     =========================
     Getter and Setter Methods
     =========================
      */
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
 
     public Trip getSelected() {
         return selected;
@@ -155,7 +165,7 @@ public class SearchController implements Serializable {
     public void setSelected(Trip selected) {
         this.selected = selected;
     }
-    
+
     public List<Hotel> getHotelList() {
         return hotelList;
     }
@@ -163,7 +173,7 @@ public class SearchController implements Serializable {
     public void setHotelList(List<Hotel> hotelList) {
         this.hotelList = hotelList;
     }
-    
+
     public List<String> getFinalLocations() {
         return finalLocations;
     }
@@ -171,9 +181,9 @@ public class SearchController implements Serializable {
     public void setFinalLocations(List<String> finalLocations) {
         this.finalLocations = finalLocations;
     }
-    
+
     public void setCityLocations(List<String> cityLocations) {
-        this.cityLocations = cityLocations;    
+        this.cityLocations = cityLocations;
     }
 
     public void setLocationTemp(String locationTemp) {
@@ -187,7 +197,6 @@ public class SearchController implements Serializable {
     public void setFoodList(List<Food> foodList) {
         this.foodList = foodList;
     }
-    
 
     public Integer getBudget() {
         return budget;
@@ -250,16 +259,31 @@ public class SearchController implements Serializable {
     Instance Methods
     ================
      */
-    public String testThing()
-    {
-        return "/takeTrip/Malibu?faces-redirect=true";
+    public List<Food> getTripFood(Trip trip) {
+        List<Trip> tripList = getTripsList();
+        String tripName = trip.getName();
+        for (Trip i : tripList) {
+            if (i.getName().equals(tripName)) {
+                return i.getFoodList();
+            }
+        }
+        return null;
     }
-    
+
+    public List<Hotel> getTripHotel(Trip trip){
+        List<Trip> tripList = getTripsList();
+        String tripName = trip.getName();
+        for (Trip i : tripList) {
+            if (i.getName().equals(tripName)){
+                return i.getHotelList();
+            }
+        }
+        return null;
+    }
     public String performTripSearch() {
         this.makeLocationChoice();
         List<Trip> trips = new ArrayList<>();
-        for (int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             searchStr = finalLocations.get(i);
             String apiUrl = makeApiUrl();
             tripsList = initializeTrips(apiUrl, trips);
@@ -268,78 +292,60 @@ public class SearchController implements Serializable {
         }
         //Initilize all of the data fields
         return "/takeTrip/Trip?faces-redirect=true";
-        
+
     }
 
-    public void makeLocationChoice()
-    {
+    public void makeLocationChoice() {
         this.generateLocations();
-        if (locationTemp.equals("Beach"))
-        {
+        if (locationTemp.equals("Beach")) {
             List<String> copy = new ArrayList<>(beachLocations);
             Collections.shuffle(copy);
             copy.subList(0, 3);
-            for (int i = 0; i < 3; i++)
-            {
+            for (int i = 0; i < 3; i++) {
                 finalLocations.add(copy.get(i));
             }
-        }
-        else if(locationTemp.equals("Desert"))
-        {
+        } else if (locationTemp.equals("Desert")) {
             List<String> copy = new ArrayList<>(desertLocations);
             Collections.shuffle(copy);
             copy.subList(0, 3);
-            for (int i = 0; i < 3; i++)
-            {
+            for (int i = 0; i < 3; i++) {
                 finalLocations.add(copy.get(i));
             }
-        }
-        else if(locationTemp.equals("Mountain"))
-        {
+        } else if (locationTemp.equals("Mountain")) {
             List<String> copy = new ArrayList<>(mountainLocations);
             Collections.shuffle(copy);
             copy.subList(0, 3);
-            for (int i = 0; i < 3; i++)
-            {
+            for (int i = 0; i < 3; i++) {
                 finalLocations.add(copy.get(i));
             }
-        }
-        else if(locationTemp.equals("Snow"))
-        {
+        } else if (locationTemp.equals("Snow")) {
             List<String> copy = new ArrayList<>(snowLocations);
             Collections.shuffle(copy);
             copy.subList(0, 3);
-            for (int i = 0; i < 3; i++)
-            {
+            for (int i = 0; i < 3; i++) {
                 finalLocations.add(copy.get(i));
             }
-        }
-        else if(locationTemp.equals("Forest"))
-        {
+        } else if (locationTemp.equals("Forest")) {
             List<String> copy = new ArrayList<>(forestLocations);
             Collections.shuffle(copy);
             copy.subList(0, 3);
-            for (int i = 0; i < 3; i++)
-            {
+            for (int i = 0; i < 3; i++) {
                 finalLocations.add(copy.get(i));
             }
-        }
-        else if(locationTemp.equals("City"))
-        {
+        } else if (locationTemp.equals("City")) {
             List<String> copy = new ArrayList<>(cityLocations);
             Collections.shuffle(copy);
             copy.subList(0, 3);
-            for (int i = 0; i < 3; i++)
-            {
+            for (int i = 0; i < 3; i++) {
                 finalLocations.add(copy.get(i));
             }
         }
-        
+
     }
+
     public List<Trip> initializeTrips(String apiUrl, List<Trip> trips) {
-        
+
 //        List<Trip> trips = new ArrayList();
-        
         /*
         Redirecting to show a JSF page involves more than one subsequent requests and
         the messages would die from one request to another if not kept in the Flash scope.
@@ -380,30 +386,29 @@ public class SearchController implements Serializable {
 
             JSONArray resultsArray = new JSONArray(resultsStr);
             int resultLength = resultsArray.length();
-            
+
             //Make a new trip option for each result returned
-            for (int i = 0; i < resultLength; i++){
+            for (int i = 0; i < resultLength; i++) {
                 JSONObject result = resultsArray.getJSONObject(i);
-                
+
                 //Get Lat and Lng from result
                 JSONObject geometryObject = new JSONObject(result.optString("geometry", ""));
                 JSONObject locationObject = new JSONObject(geometryObject.optString("location", ""));
                 String lat = locationObject.optString("lat", "");
                 String lng = locationObject.optString("lng", "");
-                
                 //Get name
                 String name = result.optString("name", "");
-                
+
                 //Get photo reference
                 JSONArray photosArray = new JSONArray(result.optString("photos", ""));
                 int numPhotos = photosArray.length();
                 List<String> photos = new ArrayList();
-                for (int j = 0; j < numPhotos; j++){
+                for (int j = 0; j < numPhotos; j++) {
                     JSONObject photoObject = photosArray.getJSONObject(j);
                     String photoRef = photoObject.optString("photo_reference", "");
                     photos.add("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + photoRef + "&key=AIzaSyCxSNfHEfZ3hpmUiygj_6Fvyhp_i1xHouw");
                 }
-                
+
                 Trip trip = new Trip(lat, lng, name, photos);
                 trips.add(trip);
             }
@@ -435,35 +440,35 @@ public class SearchController implements Serializable {
         }
         return front + end;
     }
-    
-    public List<Food> populateFoodData(List<Trip> trips){
+
+    public List<Food> populateFoodData(List<Trip> trips) {
         int numTrips = trips.size();
         FoodDataManager manager = new FoodDataManager();
-        
-        for (int i = 0; i < numTrips; i++){
+
+        for (int i = 0; i < numTrips; i++) {
             foodList = manager.nearbyFood(trips.get(i));
-            
+
             trips.get(i).setFoodList(foodList);
         }
-        
+
         return foodList;
     }
-    
-    public List<Hotel> populateHotelData(List<Trip> trips){
+
+    public List<Hotel> populateHotelData(List<Trip> trips) {
         int numTrips = trips.size();
         HotelDataManager manager = new HotelDataManager();
-        
-        for (int i = 0; i < numTrips; i++){
+
+        for (int i = 0; i < numTrips; i++) {
             hotelList = manager.nearbyHotels(trips.get(i));
-            
+
             trips.get(i).setHotelList(hotelList);
         }
-        
+
         return hotelList;
     }
-    
-    public void clear(){
-        
+
+    public void clear() {
+
     }
 
 }
