@@ -224,7 +224,7 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                 <!--Dropdown search options -->
                                 <p:calendar id="datePublished" placeholder="MM/dd/yyyy" pattern="MM/dd/yyyy" class="inputTextField" mask="true"
                                             value="#{searchController.startDate}" 
-                                            required="true" requiredMessage="#{bundle.CreatePublicVideoRequiredMessage_datePublished}" />
+                                            required="true" requiredMessage="Please Select a Start Date!" />
                             </th>
 
                         </tr>
@@ -251,18 +251,20 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                     <f:validateLength minimum="2" />
                                 </p:inputText>
                             </th>
-                            
+                        </tr>
+                        <tr>                            
                             <th align="left">
                                 <h:outputLabel for="searchQueryField" value="Home State:" />
                             </th>
                             <th align="right">
-                                <p:inputText id="searchState" value="#{searchController.state}" 
-                                             required="true" requiredMessage="Please Enter a State!"
-                                             placeholder="Enter Your City" >
-                                    <f:validateLength minimum="2" />
-                                </p:inputText>
+                                <p:selectOneMenu id="searchState" value="#{searchController.state}"
+                                                 required="true" requiredMessage="Please Select a State!" 
+                                                 class="standardText" >
+                                    <f:selectItem itemLabel="Select State"  itemValue="" noSelectionOption="true"/>
+                                    <f:selectItems value="#{userController.listOfStates()}" var="state"
+                                                   itemLabel="#{state}" itemValue="#{state}" />
+                                </p:selectOneMenu>
                             </th>
-                            
                         </tr>
 
 
