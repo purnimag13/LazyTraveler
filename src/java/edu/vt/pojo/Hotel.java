@@ -14,14 +14,24 @@ public class Hotel {
     private String rating;
     private String priceLevel;
     private String name;
+    private String icon;
 
-    public Hotel(String address, String rating, String priceLevel, String name) {
+    public Hotel(String address, String rating, String priceLevel, String name, String icon) {
         this.address = address;
         this.rating = rating;
         this.priceLevel = priceLevel;
         this.name = name;
+        this.icon = icon;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+    
     public String getAddress() {
         return address;
     }

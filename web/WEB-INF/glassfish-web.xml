@@ -41,7 +41,7 @@ This file is used to configure a web application (WAR file).
   -->
 
 
-  <property name="alternatedocroot_1" value="from=/LazyTraveler/* dir=C:/Users/Will/DocRoot" />
+  <property name="alternatedocroot_1" value="from=/LazyTraveler/* dir=/Users/taralaughlin/DocRoot" />
 
   
 </glassfish-web-app>

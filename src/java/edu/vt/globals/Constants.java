@@ -38,9 +38,9 @@ public final class Constants {
     
     macOS (Unix or Linux): Specify the absolute directory path as shown below.
      */
-    public static final String FILES_ABSOLUTE_PATH = "C:/Users/Will/DocRoot/LazyTraveler/FileStorage/";
+    public static final String FILES_ABSOLUTE_PATH = "/Users/taralaughlin/DocRoot/LazyTraveler/FileStorage/";
 
-    public static final String PHOTOS_ABSOLUTE_PATH = "C:/Users/Will/DocRoot/LazyTraveler/PhotoStorage/";
+    public static final String PHOTOS_ABSOLUTE_PATH = "/Users/taralaughlin/DocRoot/LazyTraveler/PhotoStorage/";
 
 
     /*

@@ -85,6 +85,7 @@ public class FoodDataManager {
                 
                 //Get name
                 String name = result.optString("name", "");
+                String icon = result.optString("icon", "");
                 
                 //Get price level
                 String priceLevel = " ";
@@ -99,7 +100,7 @@ public class FoodDataManager {
                 //Get Rating 
                 String rating = result.optString ("rating", "");
                 
-                foodList.add(new Food(lat, lng, priceLevel, name, rating));
+                foodList.add(new Food(lat, lng, priceLevel, name, rating, icon));
             }
            
 
