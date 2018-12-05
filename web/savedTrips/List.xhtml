@@ -10,12 +10,12 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListSavedTripsTitle}"></h:outputText>
+            <h:outputText value="Saved Trips"></h:outputText>
         </ui:define>
 
-        <ui:define name="body">
+        <ui:define name="editableContent">
             <h:form id="SavedTripsListForm">
-                <p:panel header="#{bundle.ListSavedTripsTitle}">
+                <p:panel header="Saved Trips List">
                     <p:dataTable id="datalist" value="#{savedTripsController.items}" var="item"
                                  selectionMode="single" selection="#{savedTripsController.selected}"
                                  paginator="true"
@@ -95,7 +95,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{savedTripsController.prepareCreate}" update=":SavedTripsCreateForm" oncomplete="PF('SavedTripsCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SavedTripsViewForm" oncomplete="PF('SavedTripsViewDialog').show()" disabled="#{empty savedTripsController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SavedTripsEditForm" oncomplete="PF('SavedTripsEditDialog').show()" disabled="#{empty savedTripsController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{savedTripsController.destroy}" update=":growl,datalist" disabled="#{empty savedTripsController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{savedTripsController.destroy}" update="datalist" disabled="#{empty savedTripsController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -4,8 +4,10 @@ import edu.vt.EntityBeans.SavedTrips;
 import edu.vt.controllers.util.JsfUtil;
 import edu.vt.controllers.util.JsfUtil.PersistAction;
 import edu.vt.FacadeBeans.SavedTripsFacade;
+import edu.vt.pojo.Trip;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -162,4 +164,28 @@ public class SavedTripsController implements Serializable {
 
     }
 
+    public void saveTrip(Trip trip){
+        SavedTrips savedTrip = prepareCreate();
+        savedTrip.setId(1);
+        savedTrip.setFlightCost(Double.parseDouble(trip.getFlightList().get(0).getCost()));
+        
+        String latLng = trip.getLatitude() + "," + trip.getLongitude();
+        savedTrip.setLocation(latLng);
+        
+        savedTrip.setStartLocation(latLng);
+        Date date = new Date();
+        savedTrip.setStartDate(date);
+        
+        savedTrip.setEndDate(date);
+        
+        savedTrip.setHotelName(trip.getHotelList().get(0).getName());
+        savedTrip.setHotelCost(100);
+        
+        savedTrip.setRestaurants(trip.getFoodList().get(0).getName());
+        
+        savedTrip.setEvents(trip.getPhotos().get(0));
+        
+        create();
+    }
+    
 }
