@@ -38,10 +38,10 @@ public final class Constants {
     
     macOS (Unix or Linux): Specify the absolute directory path as shown below.
      */
+
     public static final String FILES_ABSOLUTE_PATH = "C:/Users/Ethan/DocRoot/LazyTraveler/FileStorage/";
 
     public static final String PHOTOS_ABSOLUTE_PATH = "C:/Users/Ethan/DocRoot/LazyTraveler/PhotoStorage/";
-
 
     /*
     In glassfish-web.xml, we specified an alternate document root (DocRoot) with the statement below

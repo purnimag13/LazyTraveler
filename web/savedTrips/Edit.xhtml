@@ -33,7 +33,7 @@
                         <p:outputLabel value="#{bundle.EditSavedTripsLabel_events}" for="events" />
                         <p:inputTextarea rows="4" cols="30" id="events" value="#{savedTripsController.selected.events}" title="#{bundle.EditSavedTripsTitle_events}" required="true" requiredMessage="#{bundle.EditSavedTripsRequiredMessage_events}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{savedTripsController.update}" value="#{bundle.Save}" update="display,:SavedTripsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SavedTripsEditDialog');"/>
+                    <p:commandButton actionListener="#{savedTripsController.update}" value="#{bundle.Save}" update="display,:SavedTripsListForm:datalist" oncomplete="handleSubmit(args, 'SavedTripsEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SavedTripsEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
