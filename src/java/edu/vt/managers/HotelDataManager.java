@@ -86,6 +86,7 @@ public class HotelDataManager {
                 
                 //Get price level
                 String priceLevel = result.optString("price_level", "");
+                String icon = result.optString("icon", "");
                 
                 //Get Rating 
                 String rating = result.optString("rating", "");
@@ -93,7 +94,7 @@ public class HotelDataManager {
                 //get address
                 String address = result.optString("vicinity", "");
                 
-                hotelList.add(new Hotel(address, rating, priceLevel, name));
+                hotelList.add(new Hotel(address, rating, priceLevel, name, icon));
             }
            
 

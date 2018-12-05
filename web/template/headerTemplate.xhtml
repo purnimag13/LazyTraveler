@@ -251,6 +251,18 @@ Copyright © 2018 Osman Balci. All rights reserved.
                                     <f:validateLength minimum="2" />
                                 </p:inputText>
                             </th>
+                            
+                            <th align="left">
+                                <h:outputLabel for="searchQueryField" value="Home State:" />
+                            </th>
+                            <th align="right">
+                                <p:inputText id="searchState" value="#{searchController.state}" 
+                                             required="true" requiredMessage="Please Enter a State!"
+                                             placeholder="Enter Your City" >
+                                    <f:validateLength minimum="2" />
+                                </p:inputText>
+                            </th>
+                            
                         </tr>
 
 

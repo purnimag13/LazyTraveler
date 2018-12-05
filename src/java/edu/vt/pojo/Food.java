@@ -15,18 +15,28 @@ public class Food {
     private String price;
     private String name;
     private String rating;
+    private String icon;
 
-    public Food(String lat, String lng, String price, String name, String rating) {
+    public Food(String lat, String lng, String price, String name, String rating, String icon) {
         this.lat = lat;
         this.lng = lng;
         this.price = price;
         this.name = name;
         this.rating = rating;
+        this.icon = icon;
     }
 
     public Food() {
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+    
     public String getLat() {
         return lat;
     }

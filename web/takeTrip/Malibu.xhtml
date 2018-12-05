@@ -27,61 +27,56 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
                     </div>
                 </center>
 
+                <h:form id="form">
+                    <p:dataGrid var="food" value="#{searchController.getTripFood(searchController.selected)}" columns="3" layout="grid"
+                                rows="3" paginator="true" id="foods"
+                                rowsPerPageTemplate="6,12,16"
+                                style="padding-bottom: 10px">
+                        <f:facet name="header">
+                            Restaurant Options
+                        </f:facet>
+                        <p:panel header="#{food.name}" style="text-align:center">
+                            <h:panelGrid columns="1" style="width:100%">
+                                <p:graphicImage value="#{food.icon}"/> 
 
-                <div class="data">
-                    <p:dataList id="data1" value="#{searchController.getTripFood(searchController.selected)}" var="item"
-                                paginator="true"
-                                rows="5"
-                                rowsPerPageTemplate="5,10,15,20"
-                                class="left"> 
-                        <f:facet name="header">Restaurant Choices</f:facet>
-                        <h:outputText value="#{item.name}"> </h:outputText>
-                    </p:dataList>
-                    <p:dataList id="data2" value="#{searchController.getTripHotel(searchController.selected)}" var="item"
-                                paginator="true"
-                                rows="5"
-                                rowsPerPageTemplate="5,10,15,20"
-                                class="right"> 
-                        <f:facet name="header">Hotel Choices</f:facet>
-                        <h:outputText value="#{item.name}"> </h:outputText>
-                    </p:dataList>
+                                <h:outputText value="Price Level: #{food.price}"/>
+                                <h:outputLink value="https://www.google.com/search?q=#{food.name}+restaurant">Click for more Restaurant Information!</h:outputLink>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dataGrid>
 
+                    <p:dataGrid var="hotel" value="#{searchController.getTripHotel(searchController.selected)}" columns="3" layout="grid"
+                                rows="3" paginator="true" id="hotels"
+                                rowsPerPageTemplate="6,12,16">
+                        <f:facet name="header">
+                            Hotel Options
+                        </f:facet>
+                        <p:panel header="#{hotel.name}" style="text-align:center">
+                            <h:panelGrid columns="1" style="width:100%">
+                                <p:graphicImage value="#{hotel.icon}"/> 
 
+                                <h:outputText value="#{hotel.address}"/>
+                                <h:outputLink value="https://www.google.com/search?q=#{hotel.name}+hotel">Click for more Hotel Information!</h:outputLink>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dataGrid>
 
-<!--                    <p:repeat  value="#{searchController.getTripFlights(searchController.selected)}" var="item">
+                    <p:dataGrid var="flight" value="#{searchController.getTripFlights(searchController.selected)}" columns="3" layout="grid"
+                                rows="3" paginator="true" id="flights"
+                                rowsPerPageTemplate="6,12,16">
+                        <f:facet name="header">
+                            Flight Options
+                        </f:facet>
+                        <p:panel header="Flights" style="text-align:center">
+                            <h:panelGrid columns="1" style="width:100%">
+                                <p:graphicImage value="https://maps.gstatic.com/mapfiles/place_api/icons/airport-71.png"/> 
 
-                        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-                            <p:outputPanel>
-                                <h:panelGrid columns="2" cellpadding="5">
-                                    <h:outputText value="#{item.cost}"></h:outputText>
-                                    <h:form>
-                                        <h:commandLink action="#{item.ticketUrl}">
-                                            <h:outputText value="Click here for more info!"></h:outputText>
-                                        </h:commandLink>
-                                    </h:form>
-
-                                </h:panelGrid>
-                            </p:outputPanel>
-
-                        </h:panelGrid>
-
-                    </p:repeat>-->
-                    <p:dataList id="data3" value="#{searchController.getTripFlights(searchController.selected)}" var="item"
-                                paginator="true"
-                                rows="5"
-                                rowsPerPageTemplate="5,10,15,20"
-                                class="right"> 
-                        <f:facet name="header">Flight Choices</f:facet>
-                        <h:outputText value="Cost of Flight "> </h:outputText>
-
-                        <h:outputText value="#{item.cost}"> </h:outputText>
-                        <h:form>
-                            <h:commandLink id="tester" action="#{item.ticketUrl}">
-                                <h:outputText value="Click here for more info!"></h:outputText>
-                            </h:commandLink>
-                        </h:form>
-                    </p:dataList>
-                </div>
+                                <h:outputText value="Flight Ticket Cost: #{flight.cost}"/>
+                                <h:outputLink value="#{flight.ticketUrl}">Click for more Flight Information!</h:outputLink>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dataGrid>
+                </h:form>
             </body>
         </ui:define>
     </ui:composition>

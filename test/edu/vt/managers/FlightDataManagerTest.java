@@ -41,4 +41,18 @@ public class FlightDataManagerTest {
         fail("The test case is a prototype.");
     }
     
+    /**
+     * Test of testFindDepartureCodes method, of class FlightDataManager.
+     */
+    @Test
+    public void testFindDepartureCodes() {
+        System.out.println("DepartureCodes");
+        FlightDataManager instance = new FlightDataManager();
+        instance.findDepartureCodes("Russia");
+        
+
+        
+    }
+    
+    
 }

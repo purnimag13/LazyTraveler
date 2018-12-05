@@ -35,6 +35,7 @@ public class FlightDataManager {
     private List<Flight> flightList;
     private String address;
     private String city;
+    private String state;
     private String startDate = " ";
     private String startLocation = " ";
     private String inboundDate;
@@ -44,11 +45,20 @@ public class FlightDataManager {
     public FlightDataManager() {
     }
 
-    public FlightDataManager(Integer tripLength, String address, String city, String startDate) {
+    public FlightDataManager(Integer tripLength, String address, String city, String state, String startDate) {
         this.tripLen = tripLength;
         this.city = city;
         this.address = address;
+        this.state = state;
         this.startDate = startDate;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public List<String> getDepartureCodes() {
@@ -131,15 +141,9 @@ public class FlightDataManager {
         this.tripLen = tripLen;
     }
 
-    /**
-     * Call this method to populate the departureCodes List.
-     *
-     * @param lat
-     * @param lng
-     */
-    public void findDepartureCodes(String lat, String lng) {
-        String apiUrl = "http://aviation-edge.com/v2/public/nearby?key=aee14b-2470d6&lat=" + lat + "&lng=" + lng + "&distance=200";
 
+    public void findDepartureCodes(String state) {
+        
         departureCodes = new ArrayList();
 
         /*
@@ -157,26 +161,31 @@ public class FlightDataManager {
         :    separates Key from the Value
          */
         try {
-            // Obtain the JSON file from the searchApiUrl
-            String searchJsonData = Methods.readUrlContent(apiUrl);
+            
+            HttpResponse<JsonNode> response = Unirest.get("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + state)
+                .header("X-RapidAPI-Key", "fsr5w8PpIrmshHMJMjS4tzJnByRcp1m3ltPjsn0cwo7Tq3WwLT")
+                .asJson();
 
-            org.primefaces.json.JSONArray jsonArray;
-            org.primefaces.json.JSONObject jsonObject;
+            JSONObject result = response.getBody().getObject();
+            JSONArray places = new JSONArray(result.optString("Places", ""));
 
-            // It is a JSON array
-            jsonArray = new org.primefaces.json.JSONArray(searchJsonData);
-            int resultLength = jsonArray.length();
-
+            int placesLen = places.length();
+            int maxIndex = 3;
+            if (placesLen < 3){
+                maxIndex = placesLen;
+            }
             //Make a new trip option for each result returned
-            for (int i = 0; i < resultLength; i++) {
-                org.primefaces.json.JSONObject result = jsonArray.getJSONObject(i);
-
-                String airportCode = result.optString("codeIataAirport", "");
-                departureCodes.add(airportCode);
+            for (int i = 0; i < maxIndex; i++) {
+ 
+                JSONObject placeObject = places.getJSONObject(i);
+                
+                String code = placeObject.optString("PlaceId", "");
+                System.out.println(code);
+                departureCodes.add(code);
 
             }
 
-        } catch (Exception e) {
+        } catch (UnirestException | JSONException e) {
             Methods.showMessage("Fatal Error", "Unrecognized Search Query!",
                     "The Countries API provides no data for the search query entered!");
         }
@@ -184,12 +193,9 @@ public class FlightDataManager {
     }
 
     public void findArrivalCodes(Trip trip) {
-        String lat = trip.getLatitude();
-        String lng = trip.getLongitude();
-
-        String apiUrl = "http://aviation-edge.com/v2/public/nearby?key=aee14b-2470d6&lat=" + lat + "&lng=" + lng + "&distance=200";
-
+        
         arrivalCodes = new ArrayList();
+        String tripLocation = this.getCountryName(trip);
 
         /*
         Redirecting to show a JSF page involves more than one subsequent requests and
@@ -206,26 +212,31 @@ public class FlightDataManager {
         :    separates Key from the Value
          */
         try {
-            // Obtain the JSON file from the searchApiUrl
-            String searchJsonData = Methods.readUrlContent(apiUrl);
+            
+            HttpResponse<JsonNode> response = Unirest.get("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?query=" + tripLocation)
+                .header("X-RapidAPI-Key", "fsr5w8PpIrmshHMJMjS4tzJnByRcp1m3ltPjsn0cwo7Tq3WwLT")
+                .asJson();
 
-            org.primefaces.json.JSONArray jsonArray;
-            org.primefaces.json.JSONObject jsonObject;
 
-            // It is a JSON array
-            jsonArray = new org.primefaces.json.JSONArray(searchJsonData);
-            int resultLength = jsonArray.length();
+            JSONObject result = response.getBody().getObject();
+            JSONArray places = new JSONArray(result.optString("Places", ""));
 
+            int placesLen = places.length();
+            int maxIndex = 3;
+            if (placesLen < 3){
+                maxIndex = placesLen;
+            }
             //Make a new trip option for each result returned
-            for (int i = 0; i < resultLength; i++) {
-                org.primefaces.json.JSONObject result = jsonArray.getJSONObject(i);
+            for (int i = 0; i < maxIndex; i++) {
+ 
+                JSONObject placeObject = places.getJSONObject(i);
+                String code = placeObject.optString("PlaceId", "");
 
-                String airportCode = result.optString("codeIataAirport", "");
-                arrivalCodes.add(airportCode);
+                arrivalCodes.add(code);
 
             }
 
-        } catch (Exception e) {
+        } catch (UnirestException | JSONException e) {
             Methods.showMessage("Fatal Error", "Unrecognized Search Query!",
                     "The Countries API provides no data for the search query entered!");
         }
@@ -286,8 +297,16 @@ public class FlightDataManager {
         StringBuilder build = new StringBuilder();
         build.append(year);
         build.append("-");
+        if (month.toString().length() == 1)
+        {
+            build.append("0");
+        }
         build.append(month);
         build.append("-");
+        if (day.toString().length() == 1)
+        {
+            build.append("0");
+        }
         build.append(day);
         this.outboundDate = build.toString();
     }
@@ -298,11 +317,10 @@ public class FlightDataManager {
         this.formatOutboundDate(tripLen, inboundDate);
         this.formatStartLocation(address, city);
 
-        String[] coords = this.startCoordinates(startLocation);
-        this.findDepartureCodes(coords[0], coords[1]);
+        this.findDepartureCodes(state);
         this.findArrivalCodes(trip);
-        int departListSize = 1;
-        int arrivalListSize = 1;
+        int departListSize = this.departureCodes.size();
+        int arrivalListSize = this.arrivalCodes.size();
         for (int i = 0; i < departListSize; i++) {
             for (int j = 0; j < arrivalListSize; j++) {
                 try {
@@ -310,7 +328,7 @@ public class FlightDataManager {
                     HttpResponse<JsonNode> response = Unirest.post("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0")
                             .header("X-RapidAPI-Key", "fsr5w8PpIrmshHMJMjS4tzJnByRcp1m3ltPjsn0cwo7Tq3WwLT")
                             .header("Content-Type", "application/x-www-form-urlencoded")
-                            .field("cabinClass", "business")
+                            .field("cabinClass", "economy")
                             .field("inboundDate", outboundDate)
                             .field("children", 0)
                             .field("infants", 0)
@@ -318,8 +336,8 @@ public class FlightDataManager {
                             .field("country", "US")
                             .field("currency", "USD")
                             .field("locale", "en-US")
-                            .field("originPlace", "SFO-sky")
-                            .field("destinationPlace", "LHR-sky")
+                            .field("originPlace", departureCodes.get(i))
+                            .field("destinationPlace", arrivalCodes.get(j))
                             .field("outboundDate", inboundDate)
                             .field("adults", 1)
                             .asJson();
@@ -362,10 +380,7 @@ public class FlightDataManager {
                     }
 
                 }
-        catch (UnirestException ex) 
-                {
-            Logger.getLogger(FlightDataManager.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (JSONException ex) 
+        catch ( UnirestException | JSONException ex) 
                 {
             Logger.getLogger(FlightDataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -454,4 +469,84 @@ public class FlightDataManager {
 
     }
 
+    public String getCountryName(Trip trip){
+        String lat = trip.getLatitude();
+        String lng = trip.getLongitude();
+        
+        String countryName = "";
+        String state = "";
+        
+        String apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyCxSNfHEfZ3hpmUiygj_6Fvyhp_i1xHouw";
+        
+        /*
+        Redirecting to show a JSF page involves more than one subsequent requests and
+        the messages would die from one request to another if not kept in the Flash scope.
+        Since we will redirect to show the search Results page, we invoke preserveMessages().
+         */
+        //Methods.preserveMessages();
+
+        /*
+        JSON uses the following notation:
+        { }    represents a JavaScript object as a Dictionary with Key:Value pairs
+        [ ]    represents Array
+        [{ }]  represents an Array of JavaScript objects (dictionaries)
+        :    separates Key from the Value
+         */
+        try {
+            // Obtain the JSON file from the searchApiUrl
+            String searchJsonData = Methods.readUrlContent(apiUrl);
+
+            org.primefaces.json.JSONArray jsonArray;
+            org.primefaces.json.JSONObject jsonObject;
+
+            char firstChar = searchJsonData.charAt(0);
+
+            if (firstChar == '[') {
+                // It is a JSON array
+                jsonArray = new org.primefaces.json.JSONArray(searchJsonData);
+                jsonObject = jsonArray.getJSONObject(0);
+            } else {
+                // It is a JSON object
+                jsonObject = new org.primefaces.json.JSONObject(searchJsonData);
+            }
+
+            /*
+            Take the results data and put it into a json array.
+             */
+            String resultsStr = jsonObject.optString("results", "");
+
+            org.primefaces.json.JSONArray resultsArray = new org.primefaces.json.JSONArray(resultsStr);
+
+            //Make a new trip option for each result returned
+            org.primefaces.json.JSONObject result = resultsArray.getJSONObject(0);
+            
+            JSONArray addressComponents = new JSONArray(result.optString("address_components", ""));
+           
+            
+            for (int j = 0; j < addressComponents.length(); j++){
+                JSONObject component = addressComponents.getJSONObject(j);
+                String types = component.optString("types", "");
+                if (types.contains("country")){
+                    countryName = component.optString("short_name", "");
+                }
+                if (types.contains("administrative_area_level_1"))
+                {
+                    state = component.optString("long_name", "");
+                }
+                
+            }
+
+        } catch (Exception e) {
+            Methods.showMessage("Fatal Error", "Unrecognized Search Query!",
+                    "The Countries API provides no data for the search query entered!");
+        }
+        
+        if (!"".equals(state)){
+            state = state.replaceAll(" ", "+");
+            return state;
+        }
+        countryName = countryName.replaceAll(" ", "+");
+        return countryName;
+    }
+    
 }

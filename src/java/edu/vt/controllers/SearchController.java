@@ -10,6 +10,8 @@ import edu.vt.pojo.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.io.IOException;
+import javax.faces.context.FacesContext;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -30,12 +32,12 @@ public class SearchController implements Serializable {
     private String searchStr = "";
     private String locationTemp = "";
     private String tripType = "";
-    private Integer budget;
     private Integer tripLen;
     private String startDate;
     private String startLocation;
     private String address;
     private String city;
+    private String state;
     private Trip selected;
     private String description;
     ////////
@@ -57,6 +59,14 @@ public class SearchController implements Serializable {
 
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+    
     public String getAddress() {
         return address;
     }
@@ -139,8 +149,8 @@ public class SearchController implements Serializable {
         mountainLocations.add("Great Smoky Mountains");
 
         desertLocations.add("Egypt");
-        desertLocations.add("Africa");
-        desertLocations.add("Sahara");
+        desertLocations.add("South Africa");
+        desertLocations.add("Mali");
         desertLocations.add("Arizona");
 
         snowLocations.add("Canada");
@@ -217,14 +227,6 @@ public class SearchController implements Serializable {
         this.foodList = foodList;
     }
 
-    public Integer getBudget() {
-        return budget;
-    }
-
-    public void setBudget(Integer budget) {
-        this.budget = budget;
-    }
-
     public Integer getTripLen() {
         return tripLen;
     }
@@ -280,7 +282,7 @@ public class SearchController implements Serializable {
      */
     
     public List<Flight> getTripFlights(Trip trip){
-        FlightDataManager flightManager = new FlightDataManager(tripLen, address, city, startDate);
+        FlightDataManager flightManager = new FlightDataManager(tripLen, address, city, state, startDate);
         flightList = flightManager.findFlights(trip);
         return flightList;
     }
@@ -307,6 +309,7 @@ public class SearchController implements Serializable {
         return null;
     }
     public String performTripSearch() {
+        selected = null;
         this.makeLocationChoice();
         List<Trip> trips = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -322,6 +325,7 @@ public class SearchController implements Serializable {
     }
 
     public void makeLocationChoice() {
+        finalLocations.clear();
         this.generateLocations();
         if (locationTemp.equals("Beach")) {
             List<String> copy = new ArrayList<>(beachLocations);
@@ -371,7 +375,6 @@ public class SearchController implements Serializable {
 
     public List<Trip> initializeTrips(String apiUrl, List<Trip> trips) {
 
-//        List<Trip> trips = new ArrayList();
         /*
         Redirecting to show a JSF page involves more than one subsequent requests and
         the messages would die from one request to another if not kept in the Flash scope.
@@ -442,9 +445,9 @@ public class SearchController implements Serializable {
         } catch (Exception e) {
             Methods.showMessage("Fatal Error", "Unrecognized Search Query!",
                     "The Countries API provides no data for the search query entered!");
-            clear();
+            clearSearch();
         }
-        clear();
+        clearSearch();
 
         return trips;
 
@@ -493,7 +496,8 @@ public class SearchController implements Serializable {
         return hotelList;
     }
 
-    public void clear() {
+    public void clearSearch() {
+        
 
     }
 
