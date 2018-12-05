@@ -4,6 +4,8 @@
  */
 package edu.vt.pojo;
 
+import java.io.IOException;
+import javax.faces.context.FacesContext;
 /**
  *
  * @author WBG
