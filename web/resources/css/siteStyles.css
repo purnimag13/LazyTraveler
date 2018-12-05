@@ -329,6 +329,29 @@ Used in Profile
     width: 400px;
 }
 
+/* Used in Profile and About pages to style person's photo in a circle */
+.profilePhoto {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+/* Used in headerTemplate and QuestionnairesTaken to style user's small photo in a circle */
+.smallProfilePhoto {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    vertical-align: middle;
+}
+
 /* Used in movie List */
 .thumbnailImage {
     height: auto;
