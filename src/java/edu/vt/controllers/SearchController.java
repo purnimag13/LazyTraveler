@@ -7,11 +7,13 @@ package edu.vt.controllers;
 import edu.vt.globals.Methods;
 import edu.vt.managers.*;
 import edu.vt.pojo.*;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.json.JSONArray;
 import org.primefaces.json.JSONObject;
@@ -498,5 +500,7 @@ public class SearchController implements Serializable {
         
 
     }
+    
+    
 
 }

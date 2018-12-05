@@ -76,9 +76,9 @@ Copyright © 2018 Tara Laughlin. All rights reserved.
 
                         <h:outputText value="#{item.cost}"> </h:outputText>
                         <h:form>
-                            <h:commandLink id="tester" action="#{item.ticketUrl}">
-                                <h:outputText value="Click here for more info!"></h:outputText>
-                            </h:commandLink>
+
+                            <a href="#{item.ticketUrl}" target="_blank">
+                                Click Here for More Ticket Info</a>
                         </h:form>
                     </p:dataList>
                 </div>

@@ -232,7 +232,7 @@ public class FlightDataManager {
                 JSONObject placeObject = places.getJSONObject(i);
                 String code = placeObject.optString("PlaceId", "");
 
-                departureCodes.add(code);
+                arrivalCodes.add(code);
 
             }
 
@@ -297,8 +297,16 @@ public class FlightDataManager {
         StringBuilder build = new StringBuilder();
         build.append(year);
         build.append("-");
+        if (month.toString().length() == 1)
+        {
+            build.append("0");
+        }
         build.append(month);
         build.append("-");
+        if (day.toString().length() == 1)
+        {
+            build.append("0");
+        }
         build.append(day);
         this.outboundDate = build.toString();
     }
@@ -320,7 +328,7 @@ public class FlightDataManager {
                     HttpResponse<JsonNode> response = Unirest.post("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0")
                             .header("X-RapidAPI-Key", "fsr5w8PpIrmshHMJMjS4tzJnByRcp1m3ltPjsn0cwo7Tq3WwLT")
                             .header("Content-Type", "application/x-www-form-urlencoded")
-                            .field("cabinClass", "business")
+                            .field("cabinClass", "economy")
                             .field("inboundDate", outboundDate)
                             .field("children", 0)
                             .field("infants", 0)
@@ -328,8 +336,8 @@ public class FlightDataManager {
                             .field("country", "US")
                             .field("currency", "USD")
                             .field("locale", "en-US")
-                            .field("originPlace", "SFO-sky")
-                            .field("destinationPlace", "LHR-sky")
+                            .field("originPlace", departureCodes.get(i))
+                            .field("destinationPlace", arrivalCodes.get(j))
                             .field("outboundDate", inboundDate)
                             .field("adults", 1)
                             .asJson();
